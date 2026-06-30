@@ -195,6 +195,10 @@ function setRingProgress(ringId, progressValue, galaxyTheme) {
     progressValue !== 103 &&
     progressValue !== 105
   ) {
+    progressCircle.style.display = "block";
+    setTimeout(() => {
+      progressCircle.style.opacity = "1";
+    }, 10);
     progressCircle.setAttribute(
       "stroke",
       galaxyTheme
@@ -208,21 +212,33 @@ function setRingProgress(ringId, progressValue, galaxyTheme) {
       progressCircle.setAttribute("stroke-dasharray", circumference);
       progressCircle.setAttribute("stroke-dashoffset", strokeDashoffset);
     }
-    progressCircle.style.opacity = "1";
   } else {
     progressCircle.style.opacity = "0";
+    setTimeout(() => {
+      if (progressCircle.style.opacity === "0") {
+        progressCircle.style.display = "none";
+      }
+    }, 700);
   }
 
   if (hasProgress && (progressValue === 103 || progressValue === 105)) {
+    wavyCircle.style.display = "block";
+    setTimeout(() => {
+      wavyCircle.style.opacity = "1";
+    }, 10);
     wavyCircle.setAttribute(
       "stroke",
       galaxyTheme
         ? "url(#paint0_linear_galaxy_progress)"
         : "url(#paint0_linear_gold_progress)",
     );
-    wavyCircle.style.opacity = "1";
   } else {
     wavyCircle.style.opacity = "0";
+    setTimeout(() => {
+      if (wavyCircle.style.opacity === "0") {
+        wavyCircle.style.display = "none";
+      }
+    }, 500);
   }
 }
 
@@ -442,7 +458,7 @@ function updateUI() {
   // Final Ring Image
   const finalRingImage = document.getElementById("final-ring-image");
   finalRingImage.src =
-    progress >= 675 ? "assets/Images/ring2.png" : "assets/Images/rign.png";
+    progress >= 575 ? "assets/Images/ring2.png" : "assets/Images/rign.png";
   if (progress >= 175) {
     finalRingImage.className =
       "absolute w-[190px] h-[190px] object-contain transition-all duration-700 z-40 opacity-100 scale-100";
@@ -591,7 +607,20 @@ function updateUI() {
   let gradientType = ""; // "gold" or "galaxy"
 
   if (progress >= 175) {
-    newPointsText = progress >= 675 ? "675" : String(Math.round((progress - 175) * 1.35));
+    let points = 0;
+    if (progress >= 575) {
+      points = 1000;
+    } else if (progress === 175) {
+      points = 0;
+    } else if (progress === 225) {
+      points = 100;
+    } else {
+      const steps = Math.round((progress - 250) / 25);
+      points = 150 + steps * 50;
+    }
+    newPointsText = String(points);
+    usesGradient = true;
+    gradientType = "galaxy";
   } else if (progress >= 155) {
     newPointsText = "1000";
   } else if (progress >= 152) {
@@ -1246,9 +1275,21 @@ function updateUI() {
     spendLockedOverlay.classList.add("hidden");
 
     // Calculate Fill Width
-    const points = (progress - 175) * 2;
+    let points = 0;
+    if (progress >= 575) {
+      points = 1000;
+    } else if (progress === 175) {
+      points = 0;
+    } else if (progress === 225) {
+      points = 100;
+    } else {
+      const steps = Math.round((progress - 250) / 25);
+      points = 150 + steps * 50;
+    }
+
     let fillWidth = "0%";
-    if (points <= 100) fillWidth = `${(points / 100) * 12}%`;
+    if (points <= 0) fillWidth = "0%";
+    else if (points <= 100) fillWidth = `${(points / 100) * 12}%`;
     else if (points <= 200) fillWidth = `${12 + ((points - 100) / 100) * 15}%`;
     else if (points <= 300) fillWidth = `${27 + ((points - 200) / 100) * 16}%`;
     else if (points <= 400) fillWidth = `${43 + ((points - 300) / 100) * 15}%`;
@@ -1341,28 +1382,28 @@ function updateUI() {
     // Apply step styles
     if (progress >= 160)
       step1.className =
-        "flex items-center justify-center drop-shadow-[0_2px_5px_rgba(0,0,0,0.12)] transition-all duration-700 opacity-100 animate-float-1 scale-100";
+        "flex items-center justify-center drop-shadow-[0_2px_5px_rgba(0,0,0,0.12)] transition-all duration-700 opacity-100 scale-100";
     else
       step1.className =
         "flex items-center justify-center drop-shadow-[0_2px_5px_rgba(0,0,0,0.12)] transition-all duration-700 opacity-40 grayscale scale-95";
 
     if (progress >= 162)
       step2.className =
-        "flex items-center justify-center drop-shadow-[0_2px_5px_rgba(0,0,0,0.12)] transition-all duration-700 opacity-100 animate-float-2 scale-100";
+        "flex items-center justify-center drop-shadow-[0_2px_5px_rgba(0,0,0,0.12)] transition-all duration-700 opacity-100 scale-100";
     else
       step2.className =
         "flex items-center justify-center drop-shadow-[0_2px_5px_rgba(0,0,0,0.12)] transition-all duration-700 opacity-40 grayscale scale-95";
 
     if (progress >= 165)
       step3.className =
-        "flex items-center justify-center transition-all duration-700 opacity-100 animate-float-3 scale-100";
+        "flex items-center justify-center transition-all duration-700 opacity-100 scale-100";
     else
       step3.className =
         "flex items-center justify-center transition-all duration-700 opacity-40 grayscale scale-95";
 
     if (progress >= 170)
       step4.className =
-        "flex items-center justify-center transition-all duration-700 opacity-100 animate-float-4 scale-100 text-[#483951]";
+        "flex items-center justify-center transition-all duration-700 opacity-100 scale-100 text-[#483951]";
     else
       step4.className =
         "flex items-center justify-center transition-all duration-700 opacity-40 grayscale scale-95 text-[#947863]";
@@ -1523,10 +1564,10 @@ function tick(current) {
   } else if (current === 175) {
     nextProgress = 225;
     delay = 2500;
-  } else if (current >= 225 && current < 675) {
+  } else if (current >= 225 && current < 575) {
     nextProgress = current + 25;
     delay = 2000;
-  } else if (current >= 675) {
+  } else if (current >= 575) {
     nextProgress = 0;
     delay = 5000;
   }
@@ -1599,7 +1640,7 @@ tierCardInteractive.addEventListener("click", () => {
   else if (progress >= 170) {
     if (progress === 170) nextProgress = 175;
     else if (progress === 175) nextProgress = 225;
-    else if (progress >= 675) nextProgress = 0;
+    else if (progress >= 575) nextProgress = 0;
     else nextProgress = progress + 25;
   }
 
