@@ -195,10 +195,6 @@ function setRingProgress(ringId, progressValue, galaxyTheme) {
     progressValue !== 103 &&
     progressValue !== 105
   ) {
-    progressCircle.style.display = "block";
-    setTimeout(() => {
-      progressCircle.style.opacity = "1";
-    }, 10);
     progressCircle.setAttribute(
       "stroke",
       galaxyTheme
@@ -212,33 +208,21 @@ function setRingProgress(ringId, progressValue, galaxyTheme) {
       progressCircle.setAttribute("stroke-dasharray", circumference);
       progressCircle.setAttribute("stroke-dashoffset", strokeDashoffset);
     }
+    progressCircle.style.opacity = "1";
   } else {
     progressCircle.style.opacity = "0";
-    setTimeout(() => {
-      if (progressCircle.style.opacity === "0") {
-        progressCircle.style.display = "none";
-      }
-    }, 700);
   }
 
   if (hasProgress && (progressValue === 103 || progressValue === 105)) {
-    wavyCircle.style.display = "block";
-    setTimeout(() => {
-      wavyCircle.style.opacity = "1";
-    }, 10);
     wavyCircle.setAttribute(
       "stroke",
       galaxyTheme
         ? "url(#paint0_linear_galaxy_progress)"
         : "url(#paint0_linear_gold_progress)",
     );
+    wavyCircle.style.opacity = "1";
   } else {
     wavyCircle.style.opacity = "0";
-    setTimeout(() => {
-      if (wavyCircle.style.opacity === "0") {
-        wavyCircle.style.display = "none";
-      }
-    }, 500);
   }
 }
 
