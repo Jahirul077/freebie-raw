@@ -109,9 +109,41 @@ body {
   }
 }
 
-.points-fade-transition {
-  display: inline-block;
-  animation: pointsFadeOutIn 0.4s ease-in-out forwards;
+@keyframes pointsOverlappingFadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes pointsOverlappingFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.points-fade-out-active {
+  animation: pointsOverlappingFadeOut 0.5s ease-in-out forwards;
+}
+
+.points-fade-in-active {
+  animation: pointsOverlappingFadeIn 0.5s ease-in-out forwards;
+}
+
+.points-grid-wrapper {
+  display: inline-grid;
+  grid-template-areas: "points-cell";
+  align-items: center;
+  justify-items: center;
+}
+
+.points-grid-wrapper > span {
+  grid-area: points-cell;
 }
 
 /* Base custom resets */
@@ -119,7 +151,11 @@ body {
   box-sizing: border-box;
 }
 
-/* SVG ring transitions */
+/* SVG ring and octagon transitions */
 .progress-circle {
-  transition: stroke-dashoffset 0.7s ease-in-out, stroke 0.7s ease-in-out;
+  transition: stroke-dashoffset 0.7s ease-in-out, stroke 0.7s ease-in-out, opacity 0.7s ease-in-out;
+}
+
+.octagon-path {
+  transition: fill 0.7s ease-in-out, stroke 0.7s ease-in-out;
 }

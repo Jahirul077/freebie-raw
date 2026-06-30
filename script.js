@@ -2,8 +2,11 @@
 let progress = 0;
 let displayedPointsValue = "0";
 let currentCenterIconHTML = "";
+let displayedLockedLabelValue = "";
+let displayedBundleDealsLabelValue = "";
 let isPlaying = false;
 let timeoutId = null;
+let pointsTimeoutId = null;
 
 // Tier rewards definitions
 const tierRewards = [
@@ -237,6 +240,177 @@ function setRingProgress(ringId, progressValue, galaxyTheme) {
       }
     }, 500);
   }
+}
+
+function updateLockedLabelWithTransition(newText) {
+  if (displayedLockedLabelValue !== newText) {
+    // If it's the first render (i.e. displayedLockedLabelValue is empty), just set it without animation to prevent initial jump
+    if (displayedLockedLabelValue === "") {
+      displayedLockedLabelValue = newText;
+      const el = document.getElementById("locked-overlay-label");
+      if (el) el.innerText = newText;
+      return;
+    }
+    displayedLockedLabelValue = newText;
+    
+    const wrapper = document.getElementById("locked-overlay-label-wrapper");
+    if (wrapper) {
+      const currentLabel = document.getElementById("locked-overlay-label");
+      if (currentLabel) {
+        // Prepare current label to fade out absolutely with identical centering classes
+        currentLabel.className = "absolute left-0 right-0 w-full text-[13px] font-semibold text-[#333333] tracking-wider uppercase mt-1 points-fade-out-active text-center";
+        currentLabel.id = "locked-overlay-label-old";
+
+        // Create new label
+        const newLabel = document.createElement("p");
+        newLabel.id = "locked-overlay-label";
+        newLabel.className = "absolute left-0 right-0 w-full text-[13px] font-semibold text-[#333333] tracking-wider uppercase mt-1 points-fade-in-active text-center";
+        newLabel.innerText = newText;
+
+        wrapper.appendChild(newLabel);
+
+        // After transition, clean up old label and restore relative layout
+        setTimeout(() => {
+          const oldLabel = document.getElementById("locked-overlay-label-old");
+          if (oldLabel) {
+            oldLabel.remove();
+          }
+          newLabel.className = "relative text-[13px] font-semibold text-[#333333] tracking-wider uppercase mt-1 text-center w-full";
+        }, 500);
+      }
+    }
+  }
+}
+
+function updateBundleDealsLabelWithTransition(newText) {
+  if (displayedBundleDealsLabelValue !== newText) {
+    // If it's the first render (i.e. displayedBundleDealsLabelValue is empty), just set it without animation to prevent initial jump
+    if (displayedBundleDealsLabelValue === "") {
+      displayedBundleDealsLabelValue = newText;
+      const el = document.getElementById("bundle-deals-label");
+      if (el) el.innerText = newText;
+      return;
+    }
+    displayedBundleDealsLabelValue = newText;
+    
+    const wrapper = document.getElementById("bundle-deals-label-wrapper");
+    if (wrapper) {
+      const currentLabel = document.getElementById("bundle-deals-label");
+      if (currentLabel) {
+        // Prepare current label to fade out absolutely with identical centering classes
+        currentLabel.className = "absolute left-0 right-0 w-full text-[#333333] text-2xl font-medium tracking-wide uppercase points-fade-out-active text-center";
+        currentLabel.id = "bundle-deals-label-old";
+
+        // Create new label
+        const newLabel = document.createElement("span");
+        newLabel.id = "bundle-deals-label";
+        newLabel.className = "absolute left-0 right-0 w-full text-[#333333] text-2xl font-medium tracking-wide uppercase points-fade-in-active text-center";
+        newLabel.innerText = newText;
+
+        wrapper.appendChild(newLabel);
+
+        // After transition, clean up old label and restore relative layout
+        setTimeout(() => {
+          const oldLabel = document.getElementById("bundle-deals-label-old");
+          if (oldLabel) {
+            oldLabel.remove();
+          }
+          newLabel.className = "relative text-[#333333] text-2xl font-medium tracking-wide uppercase text-center w-full";
+        }, 500);
+      }
+    }
+  }
+}
+
+function initBundleDealsDiamonds() {
+  const diamondsContainer = document.getElementById("bundle-deals-diamonds");
+  if (!diamondsContainer) return;
+
+  let diamondsHTML = "";
+  for (let i = 0; i < 4; i++) {
+    diamondsHTML += `
+      <div
+        id="bundle-diamond-card-${i}"
+        class="relative w-[68px] h-[68px] flex items-center justify-center"
+      >
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="absolute inset-0 w-full h-full drop-shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
+          <!-- Locked state path (White) -->
+          <path
+            class="diamond-locked transition-opacity duration-700"
+            d="M5 2H19L24 9L12 22L0 9L5 2Z"
+            fill="white"
+            stroke="#EAEAEA"
+            stroke-width="0.8"
+            style="opacity: 1;"
+          />
+          <!-- Starlight state path (Gold Gradient) -->
+          <path
+            class="diamond-starlight transition-opacity duration-700"
+            d="M5 2H19L24 9L12 22L0 9L5 2Z"
+            fill="url(#paint_starlight_diamond_bg)"
+            style="opacity: 0;"
+          />
+          <!-- Galaxy state path (Purple Gradient) -->
+          <path
+            class="diamond-galaxy transition-opacity duration-700"
+            d="M5 2H19L24 9L12 22L0 9L5 2Z"
+            fill="url(#paint_galaxy_diamond_bg)"
+            style="opacity: 0;"
+          />
+        </svg>
+        <span class="diamond-content-container relative z-10 text-[15px] font-bold select-none flex items-center justify-center w-full h-full" style="transition: opacity 0.25s ease-in-out, transform 0.25s ease-in-out;"></span>
+      </div>
+    `;
+  }
+  diamondsContainer.innerHTML = diamondsHTML;
+}
+
+function initTierRewardsGrid() {
+  const rewardsGrid = document.getElementById("tier-rewards-grid");
+  if (!rewardsGrid) return;
+
+  let gridHTML = "";
+  tierRewards.forEach((reward) => {
+    gridHTML += `
+      <div
+        id="reward-card-${reward.id}"
+        class="bg-white rounded-[16px] flex flex-col items-center justify-center p-3 h-[210px] text-center shadow-[0_2px_10px_rgba(0,0,0,0.02)] border border-transparent transition-all duration-700"
+      >
+        <div class="relative w-16 h-16 flex items-center justify-center mb-2">
+          <svg viewBox="0 0 50 50" class="absolute inset-0 w-full h-full drop-shadow-[0_2px_4px_rgba(0,0,0,0.04)]">
+            <!-- Locked State Path (White) -->
+            <path
+              class="octagon-locked transition-opacity duration-700"
+              d="M14.5 0.5 L35.5 0.5 L49.5 14.5 L49.5 35.5 L35.5 49.5 L14.5 49.5 L0.5 35.5 L0.5 14.5 Z"
+              fill="white"
+              stroke="#EAEAEA"
+              stroke-width="1"
+              style="opacity: 1;"
+            />
+            <!-- Starlight Unlocked State Path (Gold Gradient) -->
+            <path
+              class="octagon-starlight transition-opacity duration-700"
+              d="M14.5 0.5 L35.5 0.5 L49.5 14.5 L49.5 35.5 L35.5 49.5 L14.5 49.5 L0.5 35.5 L0.5 14.5 Z"
+              fill="url(#paint_unlocked_octagon_bg)"
+              style="opacity: 0;"
+            />
+            <!-- Galaxy Unlocked State Path (Purple Gradient) -->
+            <path
+              class="octagon-galaxy transition-opacity duration-700"
+              d="M14.5 0.5 L35.5 0.5 L49.5 14.5 L49.5 35.5 L35.5 49.5 L14.5 49.5 L0.5 35.5 L0.5 14.5 Z"
+              fill="url(#paint_unlocked_octagon_galaxy_bg)"
+              style="opacity: 0;"
+            />
+          </svg>
+          <span class="reward-icon-container relative z-10 text-white flex items-center justify-center w-full h-full" style="transition: opacity 0.25s ease-in-out, transform 0.25s ease-in-out;"></span>
+        </div>
+        <p class="reward-label text-[13px] font-semibold leading-tight whitespace-pre-line tracking-tight uppercase mt-4 transition-colors duration-500 text-[#9C9C9C]">
+          ${reward.text}
+        </p>
+      </div>
+    `;
+  });
+  rewardsGrid.innerHTML = gridHTML;
 }
 
 // Set state and render
@@ -473,36 +647,60 @@ function updateUI() {
 
   if (displayedPointsValue !== newPointsText) {
     displayedPointsValue = newPointsText;
-    
-    // Add cross-fade transition class (fades out first)
-    pointsNumber.classList.remove("points-fade-transition");
-    void pointsNumber.offsetWidth; // force reflow
-    pointsNumber.classList.add("points-fade-transition");
 
-    // Swap text and styles at 180ms when opacity is 0
-    setTimeout(() => {
-      pointsNumber.innerText = newPointsText;
-      if (usesGradient) {
-        if (gradientType === "galaxy") {
-          pointsNumber.style.backgroundImage =
-            "linear-gradient(90deg, #483951 0%, #675470 50%, #483951 100%)";
+    const wrapper = document.getElementById("points-number-wrapper");
+    if (wrapper) {
+      const currentSpan = document.getElementById("points-number");
+      if (currentSpan) {
+        if (pointsTimeoutId) clearTimeout(pointsTimeoutId);
+
+        // Setup current span to fade out
+        currentSpan.className = "text-[80px] font-bold leading-none points-fade-out-active";
+        currentSpan.id = "points-number-old";
+
+        // Create new span to fade in
+        const newSpan = document.createElement("span");
+        newSpan.id = "points-number";
+        newSpan.className = "text-[80px] font-bold leading-none points-fade-in-active";
+        newSpan.innerText = newPointsText;
+
+        if (usesGradient) {
+          if (gradientType === "galaxy") {
+            newSpan.style.backgroundImage = "linear-gradient(90deg, #483951 0%, #675470 50%, #483951 100%)";
+          } else {
+            newSpan.style.backgroundImage = "linear-gradient(90deg, #947863 0%, #E9DDD4 50%, #947863 100%)";
+          }
+          newSpan.style.webkitBackgroundClip = "text";
+          newSpan.style.webkitTextFillColor = "transparent";
+          newSpan.style.color = "transparent";
         } else {
-          pointsNumber.style.backgroundImage =
-            "linear-gradient(90deg, #947863 0%, #E9DDD4 50%, #947863 100%)";
+          newSpan.style.color = "#1E1E1E";
         }
-        pointsNumber.style.webkitBackgroundClip = "text";
-        pointsNumber.style.webkitTextFillColor = "transparent";
-      } else {
-        pointsNumber.style.backgroundImage = "none";
-        pointsNumber.style.webkitBackgroundClip = "initial";
-        pointsNumber.style.webkitTextFillColor = "initial";
-      }
-    }, 180);
 
-    // Clean up animation class at 400ms when animation finishes
-    setTimeout(() => {
-      pointsNumber.classList.remove("points-fade-transition");
-    }, 400);
+        wrapper.appendChild(newSpan);
+
+        // After transition completes, clean up old span and make new span relative
+        pointsTimeoutId = setTimeout(() => {
+          const oldSpan = document.getElementById("points-number-old");
+          if (oldSpan) {
+            oldSpan.remove();
+          }
+          newSpan.className = "relative text-[80px] font-bold text-[#1E1E1E] leading-none";
+          // Re-apply gradient color styling if needed
+          if (usesGradient) {
+            if (gradientType === "galaxy") {
+              newSpan.style.backgroundImage = "linear-gradient(90deg, #483951 0%, #675470 50%, #483951 100%)";
+            } else {
+              newSpan.style.backgroundImage = "linear-gradient(90deg, #947863 0%, #E9DDD4 50%, #947863 100%)";
+            }
+            newSpan.style.webkitBackgroundClip = "text";
+            newSpan.style.webkitTextFillColor = "transparent";
+            newSpan.style.color = "transparent";
+          }
+          pointsTimeoutId = null;
+        }, 500);
+      }
+    }
   }
 
   // Star Icon inside Points Box
@@ -818,112 +1016,125 @@ function updateUI() {
   }
 
   // 5. UNLOCK BUNDLE DEALS DIAMONDS
-  const diamondsContainer = document.getElementById("bundle-deals-diamonds");
-  let diamondsHTML = "";
+  for (let i = 0; i < 4; i++) {
+    const card = document.getElementById(`bundle-diamond-card-${i}`);
+    if (!card) continue;
 
-  if (progress >= 115) {
-    const list =
-      progress >= 145
-        ? [
-            { type: "text", val: "25%" },
-            { type: "text", val: "35%" },
-            { type: "text", val: "45%" },
-            { type: "icon", val: "✦" },
-          ]
-        : [
-            { type: "text", val: "20%" },
-            { type: "text", val: "25%" },
-            { type: "text", val: "35%" },
-            { type: "icon", val: "✦" },
-          ];
+    const pathLocked = card.querySelector(".diamond-locked");
+    const pathStarlight = card.querySelector(".diamond-starlight");
+    const pathGalaxy = card.querySelector(".diamond-galaxy");
+    const contentContainer = card.querySelector(".diamond-content-container");
 
-    list.forEach((item, idx) => {
-      let isFilled = false;
+    let isFilled = false;
+    let val = "";
+    let isIcon = false;
+
+    if (progress >= 115) {
       if (progress >= 145) {
         isFilled =
-          (idx === 0 && progress >= 148) ||
-          (idx === 1 && progress >= 150) ||
-          (idx === 2 && progress >= 152) ||
-          (idx === 3 && progress >= 155);
+          (i === 0 && progress >= 148) ||
+          (i === 1 && progress >= 150) ||
+          (i === 2 && progress >= 152) ||
+          (i === 3 && progress >= 155);
+        if (i === 0) val = "25%";
+        else if (i === 1) val = "35%";
+        else if (i === 2) val = "45%";
+        else {
+          val = "✦";
+          isIcon = true;
+        }
       } else {
         isFilled =
-          (idx === 0 && progress >= 115) ||
-          (idx === 1 && progress >= 125) ||
-          (idx === 2 && progress >= 128) ||
-          (idx === 3 && progress >= 130);
+          (i === 0 && progress >= 115) ||
+          (i === 1 && progress >= 125) ||
+          (i === 2 && progress >= 128) ||
+          (i === 3 && progress >= 130);
+        if (i === 0) val = "20%";
+        else if (i === 1) val = "25%";
+        else if (i === 2) val = "35%";
+        else {
+          val = "✦";
+          isIcon = true;
+        }
       }
+    } else {
+      isFilled = false;
+      val = svgs.LockSVG;
+      isIcon = true;
+    }
 
-      let fillColor = "white";
+    // 1. Update background path opacities
+    if (pathLocked && pathStarlight && pathGalaxy) {
       if (isFilled) {
-        fillColor =
-          progress >= 145
-            ? "url(#paint_galaxy_diamond_bg)"
-            : "url(#paint_starlight_diamond_bg)";
+        pathLocked.style.opacity = "0";
+        if (progress >= 145) {
+          pathStarlight.style.opacity = "0";
+          pathGalaxy.style.opacity = "1";
+        } else {
+          pathStarlight.style.opacity = "1";
+          pathGalaxy.style.opacity = "0";
+        }
+      } else {
+        pathLocked.style.opacity = "1";
+        pathStarlight.style.opacity = "0";
+        pathGalaxy.style.opacity = "0";
+      }
+    }
+
+    // 2. Update content/text color & HTML with smooth cross-fade transition
+    if (contentContainer) {
+      // Determine text color class
+      const textColorClass = isFilled ? "text-white" : "text-[#333333]";
+      
+      // Update text color
+      contentContainer.className = `diamond-content-container relative z-10 text-[15px] font-bold select-none flex items-center justify-center w-full h-full ${textColorClass}`;
+      if (isIcon && val === svgs.LockSVG) {
+        contentContainer.classList.add("-mt-3");
+      } else {
+        contentContainer.classList.add("-mt-1");
       }
 
-      diamondsHTML += `
-        <div class="relative w-[68px] h-[68px] flex items-center justify-center">
-          <svg viewBox="0 0 24 24" fill="${fillColor}" xmlns="http://www.w3.org/2000/svg" class="absolute inset-0 w-full h-full drop-shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
-            <defs>
-              <linearGradient id="paint_starlight_diamond_bg" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#947863" />
-                <stop offset="0.5" stop-color="#E9DDD4" />
-                <stop offset="1" stop-color="#947863" />
-              </linearGradient>
-              <linearGradient id="paint_galaxy_diamond_bg" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#483951" />
-                <stop offset="0.5" stop-color="#675470" />
-                <stop offset="1" stop-color="#483951" />
-              </linearGradient>
-            </defs>
-            <path d="M5 2H19L24 9L12 22L0 9L5 2Z" />
-          </svg>
-          <span class="relative z-10 text-[15px] font-bold -mt-1 select-none ${isFilled ? "text-white" : "text-[#333333]"}">
-            ${item.val}
-          </span>
-        </div>
-      `;
-    });
-  } else {
-    // Under 115, render LockSVGs in diamonds
-    for (let i = 0; i < 4; i++) {
-      diamondsHTML += `
-        <div class="relative w-[68px] h-[68px] flex items-center justify-center">
-          <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" class="absolute inset-0 w-full h-full drop-shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
-            <path d="M5 2H19L24 9L12 22L0 9L5 2Z" />
-          </svg>
-          <span class="relative z-10 w-[20px] h-[28px] -mt-3">${svgs.LockSVG}</span>
-        </div>
-      `;
+      // Check if value changed
+      if (contentContainer.getAttribute("data-current-val") !== val) {
+        contentContainer.setAttribute("data-current-val", val);
+        contentContainer.style.opacity = "0";
+        contentContainer.style.transform = "scale(0.8)";
+        setTimeout(() => {
+          contentContainer.innerHTML = val;
+          contentContainer.style.opacity = "1";
+          contentContainer.style.transform = "scale(1)";
+        }, 250);
+      }
     }
   }
-  diamondsContainer.innerHTML = diamondsHTML;
 
   // Bottom Deals label
-  const bundleDealsLabel = document.getElementById("bundle-deals-label");
+  let targetBundleDealsLabelText = "";
   if (progress >= 160)
-    bundleDealsLabel.innerText = "MAX GALAXY TIER LEVEL ACHIEVED";
+    targetBundleDealsLabelText = "MAX GALAXY TIER LEVEL ACHIEVED";
   else if (progress >= 155)
-    bundleDealsLabel.innerText = "GET 1 + 1 FREE ON NEXT ORDER";
-  else if (progress >= 152) bundleDealsLabel.innerText = "BUY 3RD | SAVE 45%";
-  else if (progress >= 150) bundleDealsLabel.innerText = "BUY 2ND | SAVE 35%";
-  else if (progress >= 148) bundleDealsLabel.innerText = "BUY 1ST | SAVE 25%";
+    targetBundleDealsLabelText = "GET 1 + 1 FREE ON NEXT ORDER";
+  else if (progress >= 152) targetBundleDealsLabelText = "BUY 3RD | SAVE 45%";
+  else if (progress >= 150) targetBundleDealsLabelText = "BUY 2ND | SAVE 35%";
+  else if (progress >= 148) targetBundleDealsLabelText = "BUY 1ST | SAVE 25%";
   else if (progress >= 145)
-    bundleDealsLabel.innerText = "UNLOCKED GALAXY TIER LEVEL";
+    targetBundleDealsLabelText = "UNLOCKED GALAXY TIER LEVEL";
   else if (progress >= 130)
-    bundleDealsLabel.innerText = "GET 1 + 1 FREE ON NEXT ORDER";
-  else if (progress >= 128) bundleDealsLabel.innerText = "BUY 3RD | SAVE 35%";
-  else if (progress >= 125) bundleDealsLabel.innerText = "BUY 2ND | SAVE 25%";
-  else if (progress >= 115) bundleDealsLabel.innerText = "BUY 1ST | SAVE 20%";
+    targetBundleDealsLabelText = "GET 1 + 1 FREE ON NEXT ORDER";
+  else if (progress >= 128) targetBundleDealsLabelText = "BUY 3RD | SAVE 35%";
+  else if (progress >= 125) targetBundleDealsLabelText = "BUY 2ND | SAVE 25%";
+  else if (progress >= 115) targetBundleDealsLabelText = "BUY 1ST | SAVE 20%";
   else if (progress >= 110)
-    bundleDealsLabel.innerText = "LEVEL UP TO STARLIGHT TIER";
-  else bundleDealsLabel.innerText = "LEVEL UP TO SHINY TIER";
+    targetBundleDealsLabelText = "LEVEL UP TO STARLIGHT TIER";
+  else targetBundleDealsLabelText = "LEVEL UP TO SHINY TIER";
+
+  updateBundleDealsLabelWithTransition(targetBundleDealsLabelText);
 
   // 6. RIGHT SIDE: UNLOCK TIER REWARDS GRID
-  const rewardsGrid = document.getElementById("tier-rewards-grid");
-  let gridHTML = "";
-
   tierRewards.forEach((reward) => {
+    const card = document.getElementById(`reward-card-${reward.id}`);
+    if (!card) return;
+
     const isUnlocked =
       (reward.id === 1 && progress >= 105) ||
       (reward.id === 2 && progress >= 112) ||
@@ -947,26 +1158,60 @@ function updateUI() {
       if (reward.id === 2) displayText = "FREE SHIPPING\nON ALL ORDERS";
     }
 
-    let boxBorder = "border-transparent";
-    if (isUnlocked) {
-      boxBorder =
-        progress >= 145
-          ? "border-[#483951]/60 shadow-[0_4px_15px_rgba(72,57,81,0.06)]"
-          : "border-[#C5B5A5]";
+    // 1. Update text content
+    const label = card.querySelector(".reward-label");
+    if (label && label.innerText !== displayText) {
+      label.innerText = displayText;
     }
 
-    let fillColor = "white";
-    if (isUnlocked) {
-      fillColor =
-        progress >= 145
-          ? "url(#paint_unlocked_octagon_galaxy_bg)"
-          : "url(#paint_unlocked_octagon_bg)";
+    // 2. Update text color
+    if (label) {
+      if (isUnlocked) {
+        label.classList.remove("text-[#9C9C9C]");
+        label.classList.add("text-[#333333]");
+      } else {
+        label.classList.remove("text-[#333333]");
+        label.classList.add("text-[#9C9C9C]");
+      }
     }
 
+    // 3. Update card borders/shadows
+    if (isUnlocked) {
+      if (progress >= 145) {
+        card.className = "bg-white rounded-[16px] flex flex-col items-center justify-center p-3 h-[210px] text-center shadow-[0_4px_15px_rgba(72,57,81,0.06)] border border-[#483951]/60 transition-all duration-700";
+      } else {
+        card.className = "bg-white rounded-[16px] flex flex-col items-center justify-center p-3 h-[210px] text-center shadow-[0_2px_10px_rgba(0,0,0,0.02)] border border-[#C5B5A5] transition-all duration-700";
+      }
+    } else {
+      card.className = "bg-white rounded-[16px] flex flex-col items-center justify-center p-3 h-[210px] text-center shadow-[0_2px_10px_rgba(0,0,0,0.02)] border border-transparent transition-all duration-700";
+    }
+
+    // 4. Update SVG path fill/stroke via layered opacity transitions
+    const pathLocked = card.querySelector(".octagon-locked");
+    const pathStarlight = card.querySelector(".octagon-starlight");
+    const pathGalaxy = card.querySelector(".octagon-galaxy");
+
+    if (pathLocked && pathStarlight && pathGalaxy) {
+      if (isUnlocked) {
+        pathLocked.style.opacity = "0";
+        if (progress >= 145) {
+          pathStarlight.style.opacity = "0";
+          pathGalaxy.style.opacity = "1";
+        } else {
+          pathStarlight.style.opacity = "1";
+          pathGalaxy.style.opacity = "0";
+        }
+      } else {
+        pathLocked.style.opacity = "1";
+        pathStarlight.style.opacity = "0";
+        pathGalaxy.style.opacity = "0";
+      }
+    }
+
+    // 5. Update Center Icon with smooth fade transition
     let innerIcon = "";
     if (isUnlocked) {
       if (reward.id === 2) {
-        // shipping icon
         innerIcon = `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="relative z-10"><rect x="1" y="3" width="15" height="13" /><polygon points="16 8 20 8 23 11 23 16 16 16 16 8" /><circle cx="5.5" cy="18.5" r="2.5" /><circle cx="18.5" cy="18.5" r="2.5" /></svg>`;
       } else if (reward.id === 3) {
         innerIcon = `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="relative z-10"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></svg>`;
@@ -983,36 +1228,26 @@ function updateUI() {
       } else if (reward.id === 9) {
         innerIcon = `<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="relative z-10"><path d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7z" fill="white" stroke="none" /><rect x="5" y="16" width="14" height="3" rx="1" fill="white" stroke="none" /></svg>`;
       } else {
-        // gift icon
         innerIcon = svgs.GiftSVG;
       }
     } else {
       innerIcon = svgs.LockSVG;
     }
 
-    gridHTML += `
-      <div
-        class="bg-white rounded-[16px] flex flex-col items-center justify-center p-3 h-[210px] text-center shadow-[0_2px_10px_rgba(0,0,0,0.02)] border transition-all duration-500 ${boxBorder}"
-      >
-        <div class="relative w-16 h-16 flex items-center justify-center mb-2">
-          <svg viewBox="0 0 50 50" class="absolute inset-0 w-full h-full drop-shadow-[0_2px_4px_rgba(0,0,0,0.04)]">
-            <path
-              d="M14.5 0.5 L35.5 0.5 L49.5 14.5 L49.5 35.5 L35.5 49.5 L14.5 49.5 L0.5 35.5 L0.5 14.5 Z"
-              fill="${fillColor}"
-              stroke="${isUnlocked ? "transparent" : "#EAEAEA"}"
-              stroke-width="1"
-            />
-          </svg>
-          <span class="relative z-10 text-white flex items-center justify-center">${innerIcon}</span>
-        </div>
-        <p class="text-[13px] font-semibold leading-tight whitespace-pre-line tracking-tight uppercase mt-4 transition-colors duration-500 ${isUnlocked ? "text-[#333333]" : "text-[#9C9C9C]"}">
-          ${displayText}
-        </p>
-      </div>
-    `;
+    const iconContainer = card.querySelector(".reward-icon-container");
+    if (iconContainer) {
+      if (iconContainer.getAttribute("data-current-icon") !== innerIcon) {
+        iconContainer.setAttribute("data-current-icon", innerIcon);
+        iconContainer.style.opacity = "0";
+        iconContainer.style.transform = "scale(0.8)";
+        setTimeout(() => {
+          iconContainer.innerHTML = innerIcon;
+          iconContainer.style.opacity = "1";
+          iconContainer.style.transform = "scale(1)";
+        }, 250);
+      }
+    }
   });
-
-  rewardsGrid.innerHTML = gridHTML;
 
   // 7. RIGHT SIDE: SPEND SPARKLE POINTS SLIDER & LOCKED STATE
   const spendSlider = document.getElementById("spend-points-slider-container");
@@ -1150,15 +1385,15 @@ function updateUI() {
 
     // Locked Overlay display details
     const overlayIcons = document.getElementById("locked-overlay-icons");
-    const overlayLabel = document.getElementById("locked-overlay-label");
+    let targetOverlayLabelText = "";
 
     if (progress >= 148) {
       overlayIcons.innerHTML = svgs.Star2SVG;
       if (progress >= 160)
-        overlayLabel.innerText = "MAX GALAXY TIER LEVEL ACHIEVED";
+        targetOverlayLabelText = "MAX GALAXY TIER LEVEL ACHIEVED";
       else if (progress >= 155)
-        overlayLabel.innerText = "UNLOCKED GALAXY TIER REWARDS";
-      else overlayLabel.innerText = "COMPLETE GALAXY TIER TO UNLOCK REWARDS";
+        targetOverlayLabelText = "UNLOCKED GALAXY TIER REWARDS";
+      else targetOverlayLabelText = "COMPLETE GALAXY TIER TO UNLOCK REWARDS";
     } else {
       // Show lock/unlock list
       let lockListHTML = "";
@@ -1196,17 +1431,19 @@ function updateUI() {
       overlayIcons.innerHTML = lockListHTML;
 
       if (progress >= 145)
-        overlayLabel.innerText = "UNLOCKED GALAXY TIER LEVEL";
+        targetOverlayLabelText = "UNLOCKED GALAXY TIER LEVEL";
       else if (progress >= 122)
-        overlayLabel.innerText = "LEVEL UP TO GALAXY TIER";
+        targetOverlayLabelText = "LEVEL UP TO GALAXY TIER";
       else if (progress >= 115)
-        overlayLabel.innerText = "UNLOCKED STARLIGHT TIER LEVEL";
+        targetOverlayLabelText = "UNLOCKED STARLIGHT TIER LEVEL";
       else if (progress >= 112)
-        overlayLabel.innerText = "LEVEL UP TO STARLIGHT TIER";
+        targetOverlayLabelText = "LEVEL UP TO STARLIGHT TIER";
       else if (progress >= 102)
-        overlayLabel.innerText = "LEVEL UP TO SHINY TIER";
-      else overlayLabel.innerText = "SIGN UP TO JOIN VIP LOYALTY UNIVERSE CLUB";
+        targetOverlayLabelText = "LEVEL UP TO SHINY TIER";
+      else targetOverlayLabelText = "SIGN UP TO JOIN VIP LOYALTY UNIVERSE CLUB";
     }
+
+    updateLockedLabelWithTransition(targetOverlayLabelText);
   }
 }
 
@@ -1406,4 +1643,6 @@ if (typeof svgs !== "undefined") {
     );
   }
 }
+initBundleDealsDiamonds();
+initTierRewardsGrid();
 updateUI();

@@ -274,11 +274,16 @@
                       class="bg-white rounded-[16px] flex-[1.2] flex flex-col items-center justify-center py-8 border transition-all duration-1000 border-transparent"
                     >
                       <div class="flex items-center gap-1">
-                        <span
-                          id="points-number"
-                          class="text-[80px] font-bold text-[#1E1E1E] leading-none transition-all duration-500"
-                          >0</span
+                        <div
+                          id="points-number-wrapper"
+                          class="points-grid-wrapper min-w-[70px] h-[80px]"
                         >
+                          <span
+                            id="points-number"
+                            class="relative text-[80px] font-bold text-[#1E1E1E] leading-none"
+                            >0</span
+                          >
+                        </div>
                         <span id="star-icon-points"></span>
                       </div>
                       <span
@@ -520,12 +525,17 @@
                     <!-- Will be rendered dynamically via JS -->
                   </div>
 
-                  <span
-                    id="bundle-deals-label"
-                    class="text-[#333333] text-2xl font-medium tracking-wide uppercase"
+                  <div
+                    id="bundle-deals-label-wrapper"
+                    class="relative flex items-center justify-center min-h-[32px] w-full text-center"
                   >
-                    LEVEL UP TO SHINY TIER
-                  </span>
+                    <span
+                      id="bundle-deals-label"
+                      class="relative text-[#333333] text-2xl font-medium tracking-wide uppercase text-center w-full"
+                    >
+                      LEVEL UP TO SHINY TIER
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -722,12 +732,17 @@
                     >
                       <!-- Dynamic icons will be here -->
                     </div>
-                    <p
-                      id="locked-overlay-label"
-                      class="text-[13px] font-semibold text-[#333333] tracking-wider uppercase mt-1"
+                    <div
+                      id="locked-overlay-label-wrapper"
+                      class="relative flex items-center justify-center min-h-[24px] w-full text-center"
                     >
-                      SIGN UP TO JOIN VIP LOYALTY UNIVERSE CLUB
-                    </p>
+                      <p
+                        id="locked-overlay-label"
+                        class="relative text-[13px] font-semibold text-[#333333] tracking-wider uppercase mt-1 text-center w-full"
+                      >
+                        SIGN UP TO JOIN VIP LOYALTY UNIVERSE CLUB
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -820,6 +835,34 @@
           y1="0"
           x2="50"
           y2="50"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stop-color="#483951" />
+          <stop offset="0.5" stop-color="#675470" />
+          <stop offset="1" stop-color="#483951" />
+        </linearGradient>
+
+        <!-- Starlight diamond gradient -->
+        <linearGradient
+          id="paint_starlight_diamond_bg"
+          x1="0"
+          y1="0"
+          x2="24"
+          y2="24"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stop-color="#947863" />
+          <stop offset="0.5" stop-color="#E9DDD4" />
+          <stop offset="1" stop-color="#947863" />
+        </linearGradient>
+
+        <!-- Galaxy diamond gradient -->
+        <linearGradient
+          id="paint_galaxy_diamond_bg"
+          x1="0"
+          y1="0"
+          x2="24"
+          y2="24"
           gradientUnits="userSpaceOnUse"
         >
           <stop stop-color="#483951" />
