@@ -453,31 +453,51 @@ function updateUI() {
   if (progress >= 175) {
     ring1.setAttribute(
       "class",
-      "absolute w-[190px] h-[190px] transition-all duration-700 z-30 opacity-0 scale-95 pointer-events-none"
+      "absolute w-[190px] h-[190px] transition-all duration-700 z-30 opacity-0 scale-95 pointer-events-none",
     );
   } else if (progress >= 160) {
     ring1.setAttribute(
       "class",
-      "absolute w-[190px] h-[190px] transition-all duration-700 z-30 opacity-100 spin-20s"
+      "absolute w-[190px] h-[190px] transition-all duration-700 z-30 opacity-100 spin-20s",
     );
   } else {
     ring1.setAttribute(
       "class",
-      "absolute w-[190px] h-[190px] transition-all duration-700 z-30"
+      "absolute w-[190px] h-[190px] transition-all duration-700 z-30",
     );
   }
 
   // Final Ring Image
   const finalRingImage = document.getElementById("final-ring-image");
+  const galaxyCircleBorder = document.getElementById("galaxy-circle-border");
   finalRingImage.src =
     progress >= 575 ? "assets/Images/ring2.png" : "assets/Images/rign.png";
   if (progress >= 175) {
     finalRingImage.className =
       "absolute w-[190px] h-[190px] object-contain transition-all duration-700 z-40 opacity-100 scale-100";
+    if (galaxyCircleBorder) {
+      galaxyCircleBorder.className =
+        "absolute w-[190px] h-[190px] object-contain transition-all duration-700 z-40 opacity-100 scale-100 spin-20s";
+    }
   } else {
     finalRingImage.className =
       "absolute w-[190px] h-[190px] object-contain transition-all duration-700 z-40 opacity-0 scale-95 pointer-events-none";
+    if (galaxyCircleBorder) {
+      galaxyCircleBorder.className =
+        "absolute w-[190px] h-[190px] object-contain transition-all duration-700 z-40 opacity-0 scale-95 pointer-events-none";
+    }
   }
+  // Galaxy stars — only show with the final galaxy ring image (progress >= 175)
+  const star1 = document.getElementById("galaxy-star-1");
+  const star2 = document.getElementById("galaxy-star-2");
+  if (progress >= 175) {
+    if (star1) { star1.style.opacity = "1"; star1.style.transition = "opacity 0.7s ease-in-out"; }
+    if (star2) { star2.style.opacity = "1"; star2.style.transition = "opacity 0.7s ease-in-out"; }
+  } else {
+    if (star1) star1.style.opacity = "0";
+    if (star2) star2.style.opacity = "0";
+  }
+
 
   // Ring 2
   let r2Prog = null;
