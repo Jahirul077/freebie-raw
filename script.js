@@ -71,7 +71,8 @@ function getCirclesIcon1SVG(active) {
 
 // Helper to render StarSVG with dynamic star activation and gradient colors
 function getDynamicStarsSVG(progress) {
-  const activeFill = progress >= 145 ? "url(#paint_galaxy_star)" : "url(#paint_gold_star)";
+  const activeFill =
+    progress >= 145 ? "url(#paint_galaxy_star)" : "url(#paint_gold_star)";
   const inactiveFill = "#2C2C2C";
 
   let star1Active = false; // Large star (left)
@@ -171,7 +172,6 @@ function getDynamicStarsSVG(progress) {
   `;
 }
 
-
 // Function to update SVG progress rings
 function setRingProgress(ringId, progressValue, galaxyTheme) {
   const ring = document.getElementById(ringId);
@@ -252,19 +252,21 @@ function updateLockedLabelWithTransition(newText) {
       return;
     }
     displayedLockedLabelValue = newText;
-    
+
     const wrapper = document.getElementById("locked-overlay-label-wrapper");
     if (wrapper) {
       const currentLabel = document.getElementById("locked-overlay-label");
       if (currentLabel) {
         // Prepare current label to fade out absolutely with identical centering classes
-        currentLabel.className = "absolute left-0 right-0 w-full text-[13px] font-semibold text-[#333333] tracking-wider uppercase mt-1 points-fade-out-active text-center";
+        currentLabel.className =
+          "absolute left-0 right-0 w-full text-[13px] font-semibold text-[#333333] tracking-wider uppercase mt-1 points-fade-out-active text-center";
         currentLabel.id = "locked-overlay-label-old";
 
         // Create new label
         const newLabel = document.createElement("p");
         newLabel.id = "locked-overlay-label";
-        newLabel.className = "absolute left-0 right-0 w-full text-[13px] font-semibold text-[#333333] tracking-wider uppercase mt-1 points-fade-in-active text-center";
+        newLabel.className =
+          "absolute left-0 right-0 w-full text-[13px] font-semibold text-[#333333] tracking-wider uppercase mt-1 points-fade-in-active text-center";
         newLabel.innerText = newText;
 
         wrapper.appendChild(newLabel);
@@ -275,7 +277,8 @@ function updateLockedLabelWithTransition(newText) {
           if (oldLabel) {
             oldLabel.remove();
           }
-          newLabel.className = "relative text-[13px] font-semibold text-[#333333] tracking-wider uppercase mt-1 text-center w-full";
+          newLabel.className =
+            "relative text-[13px] font-semibold text-[#333333] tracking-wider uppercase mt-1 text-center w-full";
         }, 500);
       }
     }
@@ -292,19 +295,21 @@ function updateBundleDealsLabelWithTransition(newText) {
       return;
     }
     displayedBundleDealsLabelValue = newText;
-    
+
     const wrapper = document.getElementById("bundle-deals-label-wrapper");
     if (wrapper) {
       const currentLabel = document.getElementById("bundle-deals-label");
       if (currentLabel) {
         // Prepare current label to fade out absolutely with identical centering classes
-        currentLabel.className = "absolute left-0 right-0 w-full text-[#333333] text-2xl font-medium tracking-wide uppercase points-fade-out-active text-center";
+        currentLabel.className =
+          "absolute left-0 right-0 w-full text-[#333333] text-2xl font-medium tracking-wide uppercase points-fade-out-active text-center";
         currentLabel.id = "bundle-deals-label-old";
 
         // Create new label
         const newLabel = document.createElement("span");
         newLabel.id = "bundle-deals-label";
-        newLabel.className = "absolute left-0 right-0 w-full text-[#333333] text-2xl font-medium tracking-wide uppercase points-fade-in-active text-center";
+        newLabel.className =
+          "absolute left-0 right-0 w-full text-[#333333] text-2xl font-medium tracking-wide uppercase points-fade-in-active text-center";
         newLabel.innerText = newText;
 
         wrapper.appendChild(newLabel);
@@ -315,7 +320,8 @@ function updateBundleDealsLabelWithTransition(newText) {
           if (oldLabel) {
             oldLabel.remove();
           }
-          newLabel.className = "relative text-[#333333] text-2xl font-medium tracking-wide uppercase text-center w-full";
+          newLabel.className =
+            "relative text-[#333333] text-2xl font-medium tracking-wide uppercase text-center w-full";
         }, 500);
       }
     }
@@ -445,27 +451,53 @@ function updateUI() {
 
   const ring1 = document.getElementById("ring-1-svg");
   if (progress >= 175) {
-    ring1.className =
-      "absolute w-[190px] h-[190px] transition-all duration-700 z-30 opacity-0 scale-95 pointer-events-none";
+    ring1.setAttribute(
+      "class",
+      "absolute w-[190px] h-[190px] transition-all duration-700 z-30 opacity-0 scale-95 pointer-events-none",
+    );
   } else if (progress >= 160) {
-    ring1.className =
-      "absolute w-[190px] h-[190px] transition-all duration-700 z-30 opacity-100 spin-20s";
+    ring1.setAttribute(
+      "class",
+      "absolute w-[190px] h-[190px] transition-all duration-700 z-30 opacity-100 spin-20s",
+    );
   } else {
-    ring1.className =
-      "absolute w-[190px] h-[190px] transition-all duration-700 z-30";
+    ring1.setAttribute(
+      "class",
+      "absolute w-[190px] h-[190px] transition-all duration-700 z-30",
+    );
   }
 
   // Final Ring Image
   const finalRingImage = document.getElementById("final-ring-image");
+  const galaxyCircleBorder = document.getElementById("galaxy-circle-border");
   finalRingImage.src =
     progress >= 575 ? "assets/Images/ring2.png" : "assets/Images/rign.png";
   if (progress >= 175) {
     finalRingImage.className =
       "absolute w-[190px] h-[190px] object-contain transition-all duration-700 z-40 opacity-100 scale-100";
+    if (galaxyCircleBorder) {
+      galaxyCircleBorder.className =
+        "absolute w-[190px] h-[190px] object-contain transition-all duration-700 z-40 opacity-100 scale-100 spin-20s";
+    }
   } else {
     finalRingImage.className =
       "absolute w-[190px] h-[190px] object-contain transition-all duration-700 z-40 opacity-0 scale-95 pointer-events-none";
+    if (galaxyCircleBorder) {
+      galaxyCircleBorder.className =
+        "absolute w-[190px] h-[190px] object-contain transition-all duration-700 z-40 opacity-0 scale-95 pointer-events-none";
+    }
   }
+  // Galaxy stars — only show with the final galaxy ring image (progress >= 175)
+  const star1 = document.getElementById("galaxy-star-1");
+  const star2 = document.getElementById("galaxy-star-2");
+  if (progress >= 175) {
+    if (star1) { star1.style.opacity = "1"; star1.style.transition = "opacity 0.7s ease-in-out"; }
+    if (star2) { star2.style.opacity = "1"; star2.style.transition = "opacity 0.7s ease-in-out"; }
+  } else {
+    if (star1) star1.style.opacity = "0";
+    if (star2) star2.style.opacity = "0";
+  }
+
 
   // Ring 2
   let r2Prog = null;
@@ -486,7 +518,7 @@ function updateUI() {
   if (progress >= 140) {
     r2Class += " spin-30s-reverse";
   }
-  ring2.className = r2Class;
+  ring2.setAttribute("class", r2Class);
 
   // Ring 3
   let r3Prog = null;
@@ -510,7 +542,7 @@ function updateUI() {
   if (progress >= 111) {
     r3Class += " spin-20s";
   }
-  ring3.className = r3Class;
+  ring3.setAttribute("class", r3Class);
 
   // Ring 4
   let r4Prog = null;
@@ -532,7 +564,7 @@ function updateUI() {
   if (progress >= 103) {
     r4Class += " spin-10s-reverse";
   }
-  ring4.className = r4Class;
+  ring4.setAttribute("class", r4Class);
 
   // Center Icon Container
   const centerIconContainer = document.getElementById("center-icon-container");
@@ -577,7 +609,8 @@ function updateUI() {
       currentCenterIconHTML = newCenterHTML;
       centerIconContent.style.opacity = "0";
       centerIconContent.style.transform = "scale(0.8)";
-      centerIconContent.style.transition = "opacity 0.25s ease-in-out, transform 0.25s ease-in-out";
+      centerIconContent.style.transition =
+        "opacity 0.25s ease-in-out, transform 0.25s ease-in-out";
       setTimeout(() => {
         centerIconContent.innerHTML = newCenterHTML;
         centerIconContent.style.opacity = "1";
@@ -601,7 +634,7 @@ function updateUI() {
 
   // Points Number value and style
   const pointsNumber = document.getElementById("points-number");
-  
+
   let newPointsText = "";
   let usesGradient = false;
   let gradientType = ""; // "gold" or "galaxy"
@@ -668,20 +701,24 @@ function updateUI() {
         if (pointsTimeoutId) clearTimeout(pointsTimeoutId);
 
         // Setup current span to fade out
-        currentSpan.className = "text-[80px] font-bold leading-none points-fade-out-active";
+        currentSpan.className =
+          "text-[80px] font-bold leading-none points-fade-out-active";
         currentSpan.id = "points-number-old";
 
         // Create new span to fade in
         const newSpan = document.createElement("span");
         newSpan.id = "points-number";
-        newSpan.className = "text-[80px] font-bold leading-none points-fade-in-active";
+        newSpan.className =
+          "text-[80px] font-bold leading-none points-fade-in-active";
         newSpan.innerText = newPointsText;
 
         if (usesGradient) {
           if (gradientType === "galaxy") {
-            newSpan.style.backgroundImage = "linear-gradient(90deg, #483951 0%, #675470 50%, #483951 100%)";
+            newSpan.style.backgroundImage =
+              "linear-gradient(90deg, #483951 0%, #675470 50%, #483951 100%)";
           } else {
-            newSpan.style.backgroundImage = "linear-gradient(90deg, #947863 0%, #E9DDD4 50%, #947863 100%)";
+            newSpan.style.backgroundImage =
+              "linear-gradient(90deg, #947863 0%, #E9DDD4 50%, #947863 100%)";
           }
           newSpan.style.webkitBackgroundClip = "text";
           newSpan.style.webkitTextFillColor = "transparent";
@@ -698,13 +735,16 @@ function updateUI() {
           if (oldSpan) {
             oldSpan.remove();
           }
-          newSpan.className = "relative text-[80px] font-bold text-[#1E1E1E] leading-none";
+          newSpan.className =
+            "relative text-[80px] font-bold text-[#1E1E1E] leading-none";
           // Re-apply gradient color styling if needed
           if (usesGradient) {
             if (gradientType === "galaxy") {
-              newSpan.style.backgroundImage = "linear-gradient(90deg, #483951 0%, #675470 50%, #483951 100%)";
+              newSpan.style.backgroundImage =
+                "linear-gradient(90deg, #483951 0%, #675470 50%, #483951 100%)";
             } else {
-              newSpan.style.backgroundImage = "linear-gradient(90deg, #947863 0%, #E9DDD4 50%, #947863 100%)";
+              newSpan.style.backgroundImage =
+                "linear-gradient(90deg, #947863 0%, #E9DDD4 50%, #947863 100%)";
             }
             newSpan.style.webkitBackgroundClip = "text";
             newSpan.style.webkitTextFillColor = "transparent";
@@ -717,7 +757,8 @@ function updateUI() {
   }
 
   // Star Icon inside Points Box
-  document.getElementById("star-icon-points").innerHTML = getDynamicStarsSVG(progress);
+  document.getElementById("star-icon-points").innerHTML =
+    getDynamicStarsSVG(progress);
 
   // 4. S-BRILLET / SHINY / STARLIGHT / GALAXY sliding cards
   const secBrillet = document.getElementById("tier-section-s-brillet");
@@ -1098,7 +1139,7 @@ function updateUI() {
     if (contentContainer) {
       // Determine text color class
       const textColorClass = isFilled ? "text-white" : "text-[#333333]";
-      
+
       // Update text color
       contentContainer.className = `diamond-content-container relative z-10 text-[15px] font-bold select-none flex items-center justify-center w-full h-full ${textColorClass}`;
       if (isIcon && val === svgs.LockSVG) {
@@ -1191,12 +1232,15 @@ function updateUI() {
     // 3. Update card borders/shadows
     if (isUnlocked) {
       if (progress >= 145) {
-        card.className = "bg-white rounded-[16px] flex flex-col items-center justify-center p-3 h-[210px] text-center shadow-[0_4px_15px_rgba(72,57,81,0.06)] border border-[#483951]/60 transition-all duration-700";
+        card.className =
+          "bg-white rounded-[16px] flex flex-col items-center justify-center p-3 h-[210px] text-center shadow-[0_4px_15px_rgba(72,57,81,0.06)] border border-[#483951]/60 transition-all duration-700";
       } else {
-        card.className = "bg-white rounded-[16px] flex flex-col items-center justify-center p-3 h-[210px] text-center shadow-[0_2px_10px_rgba(0,0,0,0.02)] border border-[#C5B5A5] transition-all duration-700";
+        card.className =
+          "bg-white rounded-[16px] flex flex-col items-center justify-center p-3 h-[210px] text-center shadow-[0_2px_10px_rgba(0,0,0,0.02)] border border-[#C5B5A5] transition-all duration-700";
       }
     } else {
-      card.className = "bg-white rounded-[16px] flex flex-col items-center justify-center p-3 h-[210px] text-center shadow-[0_2px_10px_rgba(0,0,0,0.02)] border border-transparent transition-all duration-700";
+      card.className =
+        "bg-white rounded-[16px] flex flex-col items-center justify-center p-3 h-[210px] text-center shadow-[0_2px_10px_rgba(0,0,0,0.02)] border border-transparent transition-all duration-700";
     }
 
     // 4. Update SVG path fill/stroke via layered opacity transitions
