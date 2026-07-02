@@ -4,7 +4,7 @@ let displayedPointsValue = "0";
 let currentCenterIconHTML = "";
 let displayedLockedLabelValue = "";
 let displayedBundleDealsLabelValue = "";
-let isPlaying = false;
+let isPlaying = true;
 let timeoutId = null;
 let pointsTimeoutId = null;
 let lastShowAlternatePosition = null;
@@ -1616,32 +1616,6 @@ function tick(current) {
   }, delay);
 }
 
-// Play/Pause Demo Toggle
-const demoToggleBtn = document.getElementById("demo-toggle-btn");
-const demoToggleIcon = document.getElementById("demo-toggle-icon");
-const demoToggleText = document.getElementById("demo-toggle-text");
-
-demoToggleBtn.addEventListener("click", () => {
-  isPlaying = !isPlaying;
-  if (isPlaying) {
-    demoToggleText.innerText = "Pause Demo";
-    demoToggleIcon.innerHTML = `
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" class="text-[#947863]">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25v13.5m-7.5-13.5v13.5" />
-      </svg>
-    `;
-    tick(progress);
-  } else {
-    demoToggleText.innerText = "Play Demo";
-    demoToggleIcon.innerHTML = `
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" class="text-[#947863]">
-        <path fill-rule="evenodd" d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z" clip-rule="evenodd" />
-      </svg>
-    `;
-    if (timeoutId) clearTimeout(timeoutId);
-  }
-});
-
 // Click to manually advance progress
 const tierCardInteractive = document.getElementById("tier-card-interactive");
 tierCardInteractive.addEventListener("click", () => {
@@ -1703,3 +1677,4 @@ if (typeof svgs !== "undefined") {
 initBundleDealsDiamonds();
 initTierRewardsGrid();
 updateUI();
+tick(progress);
