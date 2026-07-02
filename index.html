@@ -4,95 +4,35 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>VIP Loyalty Universe Club</title>
-    <!-- Load Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
     <!-- Load custom index.css -->
-    <link rel="stylesheet" href="index.css" />
-    <script>
-      // Tailwind Config
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ["Geist", "sans-serif"],
-            },
-          },
-        },
-      };
-    </script>
+    <link rel="stylesheet" href="index.css?v=19" />
   </head>
-  <body class="bg-[#FAF8F6] text-[#333333]">
-    <div class="relative w-full min-h-screen">
-      <!-- Background Image -->
-      <img
-        src="assets/Images/bg.png"
-        alt="Background"
-        class="w-full h-auto object-cover"
-      />
-
-      <div class="absolute top-6 left-0 w-full flex justify-center">
-        <div class="w-full max-w-[1700px] px-4">
+  <body>
+    <div class="vip-loyalty-app">
+      <div class="page-wrapper">
+        <div class="container-max">
           <!-- Header -->
-          <div
-            class="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-[#E9DDD4]/40 pb-6"
-          >
-            <div
-              class="text-[#333333] text-5xl xl:text-7xl font-normal font-['Libre_Caslon_Text'] uppercase leading-tight"
-            >
-              Shine Brighter as You Level Up
-            </div>
-
-            <!-- Play/Pause Demo Toggle Button -->
-            <button
-              id="demo-toggle-btn"
-              class="flex items-center gap-3 bg-white/90 hover:bg-white border border-[#E9DDD4] hover:border-[#947863] px-6 py-3.5 rounded-full shadow-[0_4px_15px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_25px_rgba(0,0,0,0.08)] transition-all duration-300 font-semibold text-[14px] text-[#4A4A4A] tracking-wider uppercase cursor-pointer select-none active:scale-[0.98] mr-2 shrink-0"
-            >
-              <span id="demo-toggle-icon" class="flex items-center">
-                <!-- Play Icon -->
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  class="text-[#947863]"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-              </span>
-              <span id="demo-toggle-text">Play Demo</span>
-            </button>
+          <div class="header-row">
+            <div class="header-title">Shine Brighter as You Level Up</div>
           </div>
 
           <!-- Content Grid -->
-          <div class="mt-6 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+          <div class="content-grid">
             <!-- LEFT SIDE COLUMN (lg:col-span-5) -->
-            <div class="lg:col-span-5 flex flex-col gap-6">
+            <div class="col-left">
               <!-- EARN SPARKLE POINTS Section -->
-              <div class="flex flex-col gap-3">
-                <h2
-                  class="text-[#4A4A4A] text-[15px] font-medium tracking-wide uppercase ml-1"
-                >
-                  Earn Sparkle Points
-                </h2>
+              <div class="section-wrapper">
+                <h2 class="section-title">Earn Sparkle Points</h2>
 
-                <div
-                  id="earn-points-container"
-                  class="bg-[#F9F6F5]/60 backdrop-blur-md rounded-[20px] p-5 shadow-[0_4px_30px_rgba(0,0,0,0.03)] border border-white/40 transition-all duration-1000"
-                >
-                  <div class="flex flex-col md:flex-row gap-5 mb-5">
+                <div id="earn-points-container" class="glass-card">
+                  <div class="earn-points-inner">
                     <!-- Concentric Circles & Icon -->
-                    <div class="flex-1 flex items-center justify-center py-4">
-                      <div
-                        class="w-[180px] h-[180px] relative flex items-center justify-center"
-                      >
+                    <div class="circles-outer-wrapper">
+                      <div class="circles-relative-container">
                         <!-- Ring 1 (outermost) -->
                         <svg
                           id="ring-1-svg"
-                          class="absolute w-[190px] h-[190px] transition-all duration-700 z-30"
+                          class="ring-1-svg"
                           viewBox="0 0 100 100"
                           fill="none"
                           overflow="visible"
@@ -107,7 +47,7 @@
                             vector-effect="non-scaling-stroke"
                           />
                           <circle
-                            class="progress-circle transition-all duration-700 ease-in-out"
+                            class="progress-circle"
                             cx="50"
                             cy="50"
                             r="50"
@@ -117,7 +57,7 @@
                             style="stroke-linecap: round; display: none"
                           />
                           <circle
-                            class="wavy-circle transition-all duration-500"
+                            class="wavy-circle"
                             cx="50"
                             cy="50"
                             r="50"
@@ -133,58 +73,172 @@
                           id="final-ring-image"
                           src="assets/Images/rign.png"
                           alt="Galaxy Ring"
-                          class="absolute w-[190px] h-[190px] object-contain transition-all duration-700 z-40 opacity-0 scale-95 pointer-events-none"
+                          class="final-ring-img"
                         />
                         <!-- Galaxy Circle Border -->
                         <img
                           id="galaxy-circle-border"
                           src="assets/Images/GalaxyCircleborder.png"
                           alt="Galaxy Border"
-                          class="absolute w-[190px] h-[190px] object-contain transition-all duration-700 z-40 opacity-0 scale-95 pointer-events-none"
+                          class="galaxy-circle-border"
                         />
                         <!-- Star 1 (top-left) -->
-                        <svg id="galaxy-star-1" class="absolute pointer-events-none" style="top: 26px; left: 26px; width: 60px; height: 60px; z-index: 50; opacity: 0; transition: opacity 0.7s ease-in-out;" viewBox="0 0 67 67" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg
+                          id="galaxy-star-1"
+                          class="absolute pointer-events-none"
+                          style="
+                            top: 26px;
+                            left: 26px;
+                            width: 60px;
+                            height: 60px;
+                            z-index: 50;
+                            opacity: 0;
+                            transition: opacity 0.7s ease-in-out;
+                          "
+                          viewBox="0 0 67 67"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
                           <g filter="url(#star1_filter)">
-                            <path d="M33.097 10C33.097 22.7561 43.4378 33.097 56.1939 33.097C43.4378 33.097 33.097 43.4378 33.097 56.1939C33.097 43.4378 22.7561 33.097 10 33.097C22.7561 33.097 33.097 22.7561 33.097 10Z" fill="url(#star1_gold)"/>
-                            <path d="M33.0975 19.2402C33.0975 26.8938 39.302 33.0984 46.9556 33.0984C39.302 33.0984 33.0975 39.3029 33.0975 46.9566C33.0975 39.3029 26.8929 33.0984 19.2393 33.0984C26.8929 33.0984 33.0975 26.8938 33.0975 19.2402Z" fill="white"/>
+                            <path
+                              d="M33.097 10C33.097 22.7561 43.4378 33.097 56.1939 33.097C43.4378 33.097 33.097 43.4378 33.097 56.1939C33.097 43.4378 22.7561 33.097 10 33.097C22.7561 33.097 33.097 22.7561 33.097 10Z"
+                              fill="url(#star1_gold)"
+                            />
+                            <path
+                              d="M33.0975 19.2402C33.0975 26.8938 39.302 33.0984 46.9556 33.0984C39.302 33.0984 33.0975 39.3029 33.0975 46.9566C33.0975 39.3029 26.8929 33.0984 19.2393 33.0984C26.8929 33.0984 33.0975 26.8938 33.0975 19.2402Z"
+                              fill="white"
+                            />
                           </g>
                           <defs>
-                            <filter id="star1_filter" x="0" y="0" width="66.1938" height="66.1934" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                              <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-                              <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-                              <feOffset/><feGaussianBlur stdDeviation="5"/>
-                              <feComposite in2="hardAlpha" operator="out"/>
-                              <feColorMatrix type="matrix" values="0 0 0 0 0.639216 0 0 0 0 0.54902 0 0 0 0 0.482353 0 0 0 0.25 0"/>
-                              <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
-                              <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+                            <filter
+                              id="star1_filter"
+                              x="0"
+                              y="0"
+                              width="66.1938"
+                              height="66.1934"
+                              filterUnits="userSpaceOnUse"
+                              color-interpolation-filters="sRGB"
+                            >
+                              <feFlood
+                                flood-opacity="0"
+                                result="BackgroundImageFix"
+                              />
+                              <feColorMatrix
+                                in="SourceAlpha"
+                                type="matrix"
+                                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                                result="hardAlpha"
+                              />
+                              <feOffset />
+                              <feGaussianBlur stdDeviation="5" />
+                              <feComposite in2="hardAlpha" operator="out" />
+                              <feColorMatrix
+                                type="matrix"
+                                values="0 0 0 0 0.639216 0 0 0 0 0.54902 0 0 0 0 0.482353 0 0 0 0.25 0"
+                              />
+                              <feBlend
+                                mode="normal"
+                                in2="BackgroundImageFix"
+                                result="effect1_dropShadow"
+                              />
+                              <feBlend
+                                mode="normal"
+                                in="SourceGraphic"
+                                in2="effect1_dropShadow"
+                                result="shape"
+                              />
                             </filter>
-                            <linearGradient id="star1_gold" x1="33.097" y1="8.097" x2="33.097" y2="58.097" gradientUnits="userSpaceOnUse">
-                              <stop stop-color="#f7f7f7"/>
-                              <stop offset="0.5" stop-color="#f7f7f7"/>
-                              <stop offset="1" stop-color="#f7f7f7"/>
+                            <linearGradient
+                              id="star1_gold"
+                              x1="33.097"
+                              y1="8.097"
+                              x2="33.097"
+                              y2="58.097"
+                              gradientUnits="userSpaceOnUse"
+                            >
+                              <stop stop-color="#f7f7f7" />
+                              <stop offset="0.5" stop-color="#f7f7f7" />
+                              <stop offset="1" stop-color="#f7f7f7" />
                             </linearGradient>
                           </defs>
                         </svg>
                         <!-- Star 2 (bottom-right) -->
-                        <svg id="galaxy-star-2" class="absolute pointer-events-none" style="bottom: 26px; right: 26px; width: 60px; height: 60px; z-index: 50; opacity: 0; transition: opacity 0.7s ease-in-out;" viewBox="0 0 67 67" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg
+                          id="galaxy-star-2"
+                          class="absolute pointer-events-none"
+                          style="
+                            top: 94px;
+                            left: 94px;
+                            width: 60px;
+                            height: 60px;
+                            z-index: 50;
+                            opacity: 0;
+                            transition: opacity 0.7s ease-in-out;
+                          "
+                          viewBox="0 0 67 67"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
                           <g filter="url(#star2_filter)">
-                            <path d="M33.097 10C33.097 22.7561 43.4378 33.097 56.1939 33.097C43.4378 33.097 33.097 43.4378 33.097 56.1939C33.097 43.4378 22.7561 33.097 10 33.097C22.7561 33.097 33.097 22.7561 33.097 10Z" fill="url(#star2_gold)"/>
-                            <path d="M33.0975 19.2402C33.0975 26.8938 39.302 33.0984 46.9556 33.0984C39.302 33.0984 33.0975 39.3029 33.0975 46.9566C33.0975 39.3029 26.8929 33.0984 19.2393 33.0984C26.8929 33.0984 33.0975 26.8938 33.0975 19.2402Z" fill="white"/>
+                            <path
+                              d="M33.097 10C33.097 22.7561 43.4378 33.097 56.1939 33.097C43.4378 33.097 33.097 43.4378 33.097 56.1939C33.097 43.4378 22.7561 33.097 10 33.097C22.7561 33.097 33.097 22.7561 33.097 10Z"
+                              fill="url(#star2_gold)"
+                            />
+                            <path
+                              d="M33.0975 19.2402C33.0975 26.8938 39.302 33.0984 46.9556 33.0984C39.302 33.0984 33.0975 39.3029 33.0975 46.9566C33.0975 39.3029 26.8929 33.0984 19.2393 33.0984C26.8929 33.0984 33.0975 26.8938 33.0975 19.2402Z"
+                              fill="white"
+                            />
                           </g>
                           <defs>
-                            <filter id="star2_filter" x="0" y="0" width="66.1938" height="66.1934" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                              <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-                              <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-                              <feOffset/><feGaussianBlur stdDeviation="5"/>
-                              <feComposite in2="hardAlpha" operator="out"/>
-                              <feColorMatrix type="matrix" values="0 0 0 0 0.639216 0 0 0 0 0.54902 0 0 0 0 0.482353 0 0 0 0.25 0"/>
-                              <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
-                              <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+                            <filter
+                              id="star2_filter"
+                              x="0"
+                              y="0"
+                              width="66.1938"
+                              height="66.1934"
+                              filterUnits="userSpaceOnUse"
+                              color-interpolation-filters="sRGB"
+                            >
+                              <feFlood
+                                flood-opacity="0"
+                                result="BackgroundImageFix"
+                              />
+                              <feColorMatrix
+                                in="SourceAlpha"
+                                type="matrix"
+                                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                                result="hardAlpha"
+                              />
+                              <feOffset />
+                              <feGaussianBlur stdDeviation="5" />
+                              <feComposite in2="hardAlpha" operator="out" />
+                              <feColorMatrix
+                                type="matrix"
+                                values="0 0 0 0 0.639216 0 0 0 0 0.54902 0 0 0 0 0.482353 0 0 0 0.25 0"
+                              />
+                              <feBlend
+                                mode="normal"
+                                in2="BackgroundImageFix"
+                                result="effect1_dropShadow"
+                              />
+                              <feBlend
+                                mode="normal"
+                                in="SourceGraphic"
+                                in2="effect1_dropShadow"
+                                result="shape"
+                              />
                             </filter>
-                            <linearGradient id="star2_gold" x1="33.097" y1="8.097" x2="33.097" y2="58.097" gradientUnits="userSpaceOnUse">
-                              <stop stop-color="#f7f7f7"/>
-                              <stop offset="0.5" stop-color="#f7f7f7"/>
-                              <stop offset="1" stop-color="#f7f7f7"/>
+                            <linearGradient
+                              id="star2_gold"
+                              x1="33.097"
+                              y1="8.097"
+                              x2="33.097"
+                              y2="58.097"
+                              gradientUnits="userSpaceOnUse"
+                            >
+                              <stop stop-color="#f7f7f7" />
+                              <stop offset="0.5" stop-color="#f7f7f7" />
+                              <stop offset="1" stop-color="#f7f7f7" />
                             </linearGradient>
                           </defs>
                         </svg>
@@ -192,7 +246,7 @@
                         <!-- Ring 2 -->
                         <svg
                           id="ring-2-svg"
-                          class="absolute w-[165px] h-[165px] transition-all duration-700"
+                          class="ring-2-svg"
                           viewBox="0 0 100 100"
                           fill="none"
                           overflow="visible"
@@ -207,7 +261,7 @@
                             vector-effect="non-scaling-stroke"
                           />
                           <circle
-                            class="progress-circle transition-all duration-700 ease-in-out"
+                            class="progress-circle"
                             cx="50"
                             cy="50"
                             r="50"
@@ -217,7 +271,7 @@
                             style="stroke-linecap: round; display: none"
                           />
                           <circle
-                            class="wavy-circle transition-all duration-500"
+                            class="wavy-circle"
                             cx="50"
                             cy="50"
                             r="50"
@@ -231,7 +285,7 @@
                         <!-- Ring 3 -->
                         <svg
                           id="ring-3-svg"
-                          class="absolute w-[140px] h-[140px] transition-all duration-700"
+                          class="ring-3-svg"
                           viewBox="0 0 100 100"
                           fill="none"
                           overflow="visible"
@@ -246,7 +300,7 @@
                             vector-effect="non-scaling-stroke"
                           />
                           <circle
-                            class="progress-circle transition-all duration-700 ease-in-out"
+                            class="progress-circle"
                             cx="50"
                             cy="50"
                             r="50"
@@ -256,7 +310,7 @@
                             style="stroke-linecap: round; display: none"
                           />
                           <circle
-                            class="wavy-circle transition-all duration-500"
+                            class="wavy-circle"
                             cx="50"
                             cy="50"
                             r="50"
@@ -270,7 +324,7 @@
                         <!-- Ring 4 (innermost) -->
                         <svg
                           id="ring-4-svg"
-                          class="absolute w-[115px] h-[115px] transition-all duration-700"
+                          class="ring-4-svg"
                           viewBox="0 0 100 100"
                           fill="none"
                           overflow="visible"
@@ -285,7 +339,7 @@
                             vector-effect="non-scaling-stroke"
                           />
                           <circle
-                            class="progress-circle transition-all duration-700 ease-in-out"
+                            class="progress-circle"
                             cx="50"
                             cy="50"
                             r="50"
@@ -295,7 +349,7 @@
                             style="stroke-linecap: round; display: none"
                           />
                           <circle
-                            class="wavy-circle transition-all duration-500"
+                            class="wavy-circle"
                             cx="50"
                             cy="50"
                             r="50"
@@ -309,11 +363,11 @@
                         <!-- Center Icon -->
                         <div
                           id="center-icon-container"
-                          class="absolute w-[95px] h-[95px] bg-white rounded-full flex items-center justify-center transition-all duration-700 z-20"
+                          class="center-icon-container"
                         >
                           <div
                             id="center-icon-content"
-                            class="flex items-center justify-center transition-all duration-300 w-full h-full"
+                            class="center-icon-content"
                           >
                             <!-- Will be dynamically updated -->
                           </div>
@@ -322,73 +376,55 @@
                     </div>
 
                     <!-- Points Box -->
-                    <div
-                      id="points-box-container"
-                      class="bg-white rounded-[16px] flex-[1.2] flex flex-col items-center justify-center py-8 border transition-all duration-1000 border-transparent"
-                    >
-                      <div class="flex items-center gap-1">
+                    <div id="points-box-container" class="points-box-container">
+                      <div class="points-box-inner">
                         <div
                           id="points-number-wrapper"
-                          class="points-grid-wrapper min-w-[70px] h-[80px]"
+                          class="points-grid-wrapper"
                         >
                           <span
                             id="points-number"
-                            class="relative text-[80px] font-bold text-[#1E1E1E] leading-none"
+                            class="points-number relative"
                             >0</span
                           >
                         </div>
                         <span id="star-icon-points"></span>
                       </div>
-                      <span
-                        class="font-inter text-[20px] font-semibold uppercase leading-[20px] tracking-normal align-middle"
-                      >
-                        SPARKLE POINTS
-                      </span>
+                      <span class="points-box-label"> SPARKLE POINTS </span>
                     </div>
                   </div>
 
                   <!-- S-BRILLET / SHINY / STARLIGHT / GALAXY Bar -->
-                  <div
-                    id="tier-card-interactive"
-                    class="w-full bg-white rounded-[16px] p-6 flex flex-col overflow-hidden relative transition-all duration-500 min-h-[209px] cursor-pointer"
-                  >
-                    <div
-                      class="relative w-full transition-all duration-500 flex flex-col"
-                    >
+                  <div id="tier-card-interactive" class="tier-card-interactive">
+                    <div class="tier-inner-container">
                       <!-- S-BRILLET Container -->
                       <div
                         id="tier-section-s-brillet"
-                        class="transition-all duration-700 ease-in-out flex flex-col gap-4"
+                        class="tier-inner-container gap-4"
                       >
-                        <div class="flex justify-between items-center">
-                          <div class="flex items-center gap-3">
+                        <div class="flex-between">
+                          <div class="flex-align-center gap-3">
                             <span id="s-brillet-logo"></span>
-                            <span
-                              id="s-brillet-title"
-                              class="text-[28px] font-normal font-['Libre_Caslon_Text'] tracking-wide mt-1 transition-all duration-500 text-black"
+                            <span id="s-brillet-title" class="tier-title"
                               >S-BRILLET</span
                             >
                           </div>
                           <span
                             id="s-brillet-points-label"
-                            class="text-[15px] font-bold uppercase transition-all duration-500 text-black"
+                            class="tier-points-label"
                           >
                             (0 Sparkle Points)
                           </span>
                         </div>
-                        <div
-                          class="h-[2px] w-full bg-gradient-to-r from-[#947863] via-[#E9DDD4] to-[#947863] opacity-60"
-                        ></div>
-                        <div class="flex justify-between items-center pt-1">
-                          <div class="flex items-center gap-2">
+                        <div class="h-2px-line bg-gradient-gold"></div>
+                        <div class="flex-between pt-1">
+                          <div class="flex-align-center gap-2">
                             <span id="s-brillet-signup-icon"></span>
-                            <span class="text-[17px] font-medium text-[#333333]"
-                              >Sign Up</span
-                            >
+                            <span class="tier-item-label">Sign Up</span>
                           </div>
                           <span
                             id="s-brillet-signup-points"
-                            class="text-[17px] font-semibold text-[#9C9C9C]"
+                            class="tier-item-points"
                           >
                             +40 Sparkle Points
                           </span>
@@ -398,50 +434,45 @@
                       <!-- SHINY Container -->
                       <div
                         id="tier-section-shiny"
-                        class="transition-all duration-700 ease-in-out flex flex-col gap-4 tier-card-hidden-down"
+                        class="tier-inner-container gap-4 tier-card-hidden-down"
                       >
-                        <div class="flex justify-between items-center">
-                          <div class="flex items-center gap-3">
+                        <div class="flex-between">
+                          <div class="flex-align-center gap-3">
                             <span id="shiny-logo"></span>
-                            <span
-                              class="text-[28px] font-normal font-['Libre_Caslon_Text'] tracking-wide mt-1 text-[#333333]"
-                              >SHINY</span
-                            >
+                            <span class="tier-title shiny">SHINY</span>
                           </div>
                           <span
                             id="shiny-points-label"
-                            class="text-[15px] font-bold uppercase text-[#333333]"
+                            class="tier-points-label shiny"
                           >
                             (100 Sparkle Points)
                           </span>
                         </div>
-                        <div
-                          class="h-[2px] w-full bg-gradient-to-r from-[#947863] via-[#E9DDD4] to-[#947863] opacity-60"
-                        ></div>
-                        <div class="flex justify-between items-center pt-1">
-                          <div class="flex items-center gap-2">
+                        <div class="h-2px-line bg-gradient-gold"></div>
+                        <div class="flex-between pt-1">
+                          <div class="flex-align-center gap-2">
                             <span id="shiny-instagram-icon"></span>
-                            <span class="text-[17px] font-medium text-[#333333]"
+                            <span class="tier-item-label"
                               >Follow us on Instagram</span
                             >
                           </div>
                           <span
                             id="shiny-instagram-points"
-                            class="text-[17px] font-semibold text-[#9C9C9C]"
+                            class="tier-item-points"
                           >
                             +30 Sparkle Points
                           </span>
                         </div>
-                        <div class="flex justify-between items-center pt-1">
-                          <div class="flex items-center gap-2">
+                        <div class="flex-between pt-1">
+                          <div class="flex-align-center gap-2">
                             <span id="shiny-newsletter-icon"></span>
-                            <span class="text-[17px] font-medium text-[#333333]"
+                            <span class="tier-item-label"
                               >Subscribe to Newsletter</span
                             >
                           </div>
                           <span
                             id="shiny-newsletter-points"
-                            class="text-[17px] font-semibold text-[#9C9C9C]"
+                            class="tier-item-points"
                           >
                             +30 Sparkle Points
                           </span>
@@ -451,50 +482,41 @@
                       <!-- STARLIGHT Container -->
                       <div
                         id="tier-section-starlight"
-                        class="transition-all duration-700 ease-in-out flex flex-col gap-4 tier-card-hidden-down"
+                        class="tier-inner-container gap-4 tier-card-hidden-down"
                       >
-                        <div class="flex justify-between items-center">
-                          <div class="flex items-center gap-3">
+                        <div class="flex-between">
+                          <div class="flex-align-center gap-3">
                             <span id="starlight-logo"></span>
-                            <span
-                              class="text-[28px] font-normal font-['Libre_Caslon_Text'] tracking-wide mt-1 text-black"
-                              >STARLIGHT</span
-                            >
+                            <span class="tier-title">STARLIGHT</span>
                           </div>
                           <span
                             id="starlight-points-label"
-                            class="text-[15px] font-bold uppercase text-[#333333]"
+                            class="tier-points-label"
                           >
                             (700 Sparkle Points)
                           </span>
                         </div>
-                        <div
-                          class="h-[2px] w-full bg-gradient-to-r from-[#947863] via-[#E9DDD4] to-[#947863] opacity-60"
-                        ></div>
-                        <div class="flex justify-between items-center pt-1">
-                          <div class="flex items-center gap-2">
+                        <div class="h-2px-line bg-gradient-gold"></div>
+                        <div class="flex-between pt-1">
+                          <div class="flex-align-center gap-2">
                             <span id="starlight-purchase-icon"></span>
-                            <span class="text-[17px] font-medium text-[#333333]"
-                              >Purchase Items</span
-                            >
+                            <span class="tier-item-label">Purchase Items</span>
                           </div>
                           <span
                             id="starlight-purchase-points"
-                            class="text-[17px] font-semibold text-[#333333]"
+                            class="tier-item-points"
                           >
                             $1 = +1.25 Sparkle Points
                           </span>
                         </div>
-                        <div class="flex justify-between items-center pt-1">
-                          <div class="flex items-center gap-2">
+                        <div class="flex-between pt-1">
+                          <div class="flex-align-center gap-2">
                             <span id="starlight-refer-icon"></span>
-                            <span class="text-[17px] font-medium text-[#333333]"
-                              >Refer a Friend</span
-                            >
+                            <span class="tier-item-label">Refer a Friend</span>
                           </div>
                           <span
                             id="starlight-refer-points"
-                            class="text-[17px] font-semibold text-[#333333]"
+                            class="tier-item-points"
                           >
                             +125 Sparkle Points
                           </span>
@@ -504,51 +526,43 @@
                       <!-- GALAXY Container -->
                       <div
                         id="tier-section-galaxy"
-                        class="transition-all duration-700 ease-in-out flex flex-col gap-4 tier-card-hidden-down"
+                        class="tier-inner-container gap-4 tier-card-hidden-down"
                       >
-                        <div class="flex justify-between items-center">
-                          <div class="flex items-center gap-3">
+                        <div class="flex-between">
+                          <div class="flex-align-center gap-3">
                             <span id="galaxy-logo"></span>
-                            <span
-                              id="galaxy-title"
-                              class="text-[28px] font-normal font-['Libre_Caslon_Text'] tracking-wide mt-1 text-[#333333]"
+                            <span id="galaxy-title" class="tier-title shiny"
                               >GALAXY</span
                             >
                           </div>
                           <span
                             id="galaxy-points-label"
-                            class="text-[15px] font-bold uppercase text-[#333333]"
+                            class="tier-points-label shiny"
                           >
                             (1000 Sparkle Points)
                           </span>
                         </div>
-                        <div
-                          class="h-[2px] w-full bg-gradient-to-r from-[#483951] via-[#675470] to-[#483951] opacity-60"
-                        ></div>
-                        <div class="flex justify-between items-center pt-1">
-                          <div class="flex items-center gap-2">
+                        <div class="h-2px-line bg-gradient-galaxy"></div>
+                        <div class="flex-between pt-1">
+                          <div class="flex-align-center gap-2">
                             <span id="galaxy-purchase-icon"></span>
-                            <span class="text-[17px] font-medium text-[#333333]"
-                              >Purchase Items</span
-                            >
+                            <span class="tier-item-label">Purchase Items</span>
                           </div>
                           <span
                             id="galaxy-purchase-points"
-                            class="text-[17px] font-semibold text-[#333333]"
+                            class="tier-item-points"
                           >
                             $1 = +1.50 Sparkle Points
                           </span>
                         </div>
-                        <div class="flex justify-between items-center pt-1">
-                          <div class="flex items-center gap-2">
+                        <div class="flex-between pt-1">
+                          <div class="flex-align-center gap-2">
                             <span id="galaxy-refer-icon"></span>
-                            <span class="text-[17px] font-medium text-[#333333]"
-                              >Refer a Friend</span
-                            >
+                            <span class="tier-item-label">Refer a Friend</span>
                           </div>
                           <span
                             id="galaxy-refer-points"
-                            class="text-[17px] font-semibold text-[#333333]"
+                            class="tier-item-points"
                           >
                             +150 Sparkle Points
                           </span>
@@ -560,32 +574,20 @@
               </div>
 
               <!-- UNLOCK BUNDLE DEALS Section -->
-              <div class="flex flex-col gap-3">
-                <h2
-                  class="text-[#4A4A4A] text-[15px] font-medium tracking-wide uppercase ml-1"
-                >
-                  Unlock Bundle Deals
-                </h2>
+              <div class="section-wrapper">
+                <h2 class="section-title">Unlock Bundle Deals</h2>
 
-                <div
-                  class="bg-[#F9F6F5]/60 backdrop-blur-md rounded-[20px] p-6 shadow-[0_4px_30px_rgba(0,0,0,0.03)] border border-white/40 flex flex-col items-center justify-center gap-6"
-                >
+                <div class="glass-card-bundle">
                   <!-- Diamonds row -->
-                  <div
-                    id="bundle-deals-diamonds"
-                    class="flex items-center justify-center gap-5 md:gap-8 w-full"
-                  >
+                  <div id="bundle-deals-diamonds" class="diamonds-row">
                     <!-- Will be rendered dynamically via JS -->
                   </div>
 
                   <div
                     id="bundle-deals-label-wrapper"
-                    class="relative flex items-center justify-center min-h-[32px] w-full text-center"
+                    class="bundle-label-wrapper"
                   >
-                    <span
-                      id="bundle-deals-label"
-                      class="relative text-[#333333] text-2xl font-medium tracking-wide uppercase text-center w-full"
-                    >
+                    <span id="bundle-deals-label" class="bundle-deals-label">
                       LEVEL UP TO SHINY TIER
                     </span>
                   </div>
@@ -594,143 +596,73 @@
             </div>
 
             <!-- RIGHT SIDE COLUMN (lg:col-span-7) -->
-            <div class="lg:col-span-7 flex flex-col gap-7">
+            <div class="col-right">
               <!-- UNLOCK TIER REWARDS Section -->
-              <div class="flex flex-col gap-3">
-                <h2
-                  class="text-[#4A4A4A] text-[15px] font-medium tracking-wide uppercase ml-1"
-                >
-                  Unlock Tier Rewards
-                </h2>
+              <div class="section-wrapper">
+                <h2 class="section-title">Unlock Tier Rewards</h2>
 
-                <div
-                  class="bg-[#F9F6F5]/60 backdrop-blur-md rounded-[20px] p-5 shadow-[0_4px_30px_rgba(0,0,0,0.03)] border border-white/40"
-                >
-                  <div
-                    id="tier-rewards-grid"
-                    class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3"
-                  >
+                <div class="glass-card-rewards">
+                  <div id="tier-rewards-grid" class="rewards-grid">
                     <!-- Will be rendered dynamically via JS -->
                   </div>
                 </div>
               </div>
 
               <!-- SPEND SPARKLE POINTS Section -->
-              <div class="flex flex-col gap-3">
-                <h2
-                  class="text-[#4A4A4A] text-[15px] font-medium tracking-wide uppercase ml-1"
-                >
-                  Spend Sparkle Points
-                </h2>
+              <div class="section-wrapper">
+                <h2 class="section-title">Spend Sparkle Points</h2>
 
-                <div
-                  class="bg-[#F9F6F5]/60 backdrop-blur-md rounded-[20px] p-10 shadow-[0_4px_30px_rgba(0,0,0,0.03)] border border-white/40 relative overflow-hidden min-h-[160px] flex items-center justify-center"
-                >
+                <div class="glass-card-spend">
                   <!-- Slider Container (Visible when progress >= 175) -->
                   <div
                     id="spend-points-slider-container"
-                    class="relative w-full h-[76px] flex items-center justify-center rounded-[16px] overflow-hidden drop-shadow-md hidden"
+                    class="spend-slider-container hidden"
                   >
                     <img
                       src="assets/Images/line.png"
                       alt="Spend Sparkle Points Rewards"
-                      class="absolute inset-0 w-full h-full object-cover"
+                      class="spend-slider-bg"
                     />
 
                     <!-- Progress Bar Container -->
-                    <div
-                      class="absolute left-0 right-0 top-[51%] h-[4px] bg-[#c2b9c5]/40 rounded-full -translate-y-1/2 z-0 mx-4"
-                    >
+                    <div class="slider-progress-track">
                       <!-- Progress Bar Fill -->
                       <div
                         id="slider-progress-bar"
-                        class="absolute left-0 top-0 bottom-0 bg-white rounded-full shadow-[0_0_8px_rgba(255,255,255,0.8)] transition-all duration-1000"
+                        class="slider-progress-fill"
                         style="width: 0%"
                       >
                         <!-- Glowing Star Thumb -->
-                        <div
-                          id="slider-star-thumb"
-                          class="absolute right-[-14px] top-1/2 -translate-y-1/2 text-white drop-shadow-[0_0_12px_rgba(255,255,255,1)]"
-                        >
+                        <div id="slider-star-thumb" class="slider-star-thumb">
                           <!-- Custom Star SVG -->
                         </div>
                       </div>
                     </div>
 
-                    <div
-                      class="relative z-10 w-full h-full px-10 sm:px-14 py-[14px] flex justify-between items-center"
-                    >
-                      <div
-                        class="flex flex-col items-center justify-between h-full select-none"
-                      >
-                        <span
-                          class="text-[14px] sm:text-[15px] font-bold text-white tracking-wide leading-none"
-                          >$5</span
-                        >
-                        <span
-                          class="text-[11px] sm:text-[13px] font-medium text-white/90 tracking-wide leading-none mt-auto"
-                          >100 POINTS</span
-                        >
+                    <div class="slider-text-row">
+                      <div class="slider-text-col">
+                        <span class="slider-text-val">$5</span>
+                        <span class="slider-text-points">100 POINTS</span>
                       </div>
-                      <div
-                        class="flex flex-col items-center justify-between h-full select-none"
-                      >
-                        <span
-                          class="text-[14px] sm:text-[15px] font-bold text-white tracking-wide leading-none"
-                          >$10</span
-                        >
-                        <span
-                          class="text-[11px] sm:text-[13px] font-medium text-white/90 tracking-wide leading-none mt-auto"
-                          >200 POINTS</span
-                        >
+                      <div class="slider-text-col">
+                        <span class="slider-text-val">$10</span>
+                        <span class="slider-text-points">200 POINTS</span>
                       </div>
-                      <div
-                        class="flex flex-col items-center justify-between h-full select-none"
-                      >
-                        <span
-                          class="text-[14px] sm:text-[15px] font-bold text-white tracking-wide leading-none"
-                          >$15</span
-                        >
-                        <span
-                          class="text-[11px] sm:text-[13px] font-medium text-white/90 tracking-wide leading-none mt-auto"
-                          >300 POINTS</span
-                        >
+                      <div class="slider-text-col">
+                        <span class="slider-text-val">$15</span>
+                        <span class="slider-text-points">300 POINTS</span>
                       </div>
-                      <div
-                        class="flex flex-col items-center justify-between h-full select-none"
-                      >
-                        <span
-                          class="text-[14px] sm:text-[15px] font-bold text-white tracking-wide leading-none"
-                          >$20</span
-                        >
-                        <span
-                          class="text-[11px] sm:text-[13px] font-medium text-white/90 tracking-wide leading-none mt-auto"
-                          >400 POINTS</span
-                        >
+                      <div class="slider-text-col">
+                        <span class="slider-text-val">$20</span>
+                        <span class="slider-text-points">400 POINTS</span>
                       </div>
-                      <div
-                        class="flex flex-col items-center justify-between h-full select-none"
-                      >
-                        <span
-                          class="text-[14px] sm:text-[15px] font-bold text-white tracking-wide leading-none"
-                          >$30</span
-                        >
-                        <span
-                          class="text-[11px] sm:text-[13px] font-medium text-white/90 tracking-wide leading-none mt-auto"
-                          >500 POINTS</span
-                        >
+                      <div class="slider-text-col">
+                        <span class="slider-text-val">$30</span>
+                        <span class="slider-text-points">500 POINTS</span>
                       </div>
-                      <div
-                        class="flex flex-col items-center justify-between h-full select-none"
-                      >
-                        <span
-                          class="text-[14px] sm:text-[15px] font-bold text-white tracking-wide leading-none"
-                          >$50</span
-                        >
-                        <span
-                          class="text-[11px] sm:text-[13px] font-medium text-white/90 tracking-wide leading-none mt-auto"
-                          >750 POINTS</span
-                        >
+                      <div class="slider-text-col">
+                        <span class="slider-text-val">$50</span>
+                        <span class="slider-text-points">750 POINTS</span>
                       </div>
                     </div>
                   </div>
@@ -738,38 +670,34 @@
                   <!-- Locked Container (Visible when progress < 175) -->
                   <div
                     id="spend-points-locked-container"
-                    class="relative flex items-center w-full px-6 py-2 bg-white rounded-2xl transition-all duration-1000 blur-[4px] opacity-30 select-none pointer-events-none w-full"
+                    class="spend-locked-container blurred-state"
                   >
                     <!-- Progress bar line -->
-                    <div
-                      class="absolute left-[48px] right-[60px] h-[3px] bg-[#E9DDD4] w-[calc(100%-108px)]"
-                    >
+                    <div class="locked-progress-track">
                       <div
                         id="locked-progress-bar"
-                        class="h-full bg-[linear-gradient(90deg,#947863_0%,#483951_100%)] transition-all duration-1000"
+                        class="locked-progress-fill"
                         style="width: 0%"
                       ></div>
                     </div>
 
                     <!-- Steps/Icons -->
-                    <div
-                      class="flex justify-between w-full relative z-10 items-center"
-                    >
+                    <div class="locked-steps-row">
                       <div
                         id="locked-step-1"
-                        class="flex items-center justify-center drop-shadow-[0_2px_5px_rgba(0,0,0,0.12)] transition-all duration-700 opacity-40 grayscale scale-95"
+                        class="locked-step-node grayscale-hidden"
                       ></div>
                       <div
                         id="locked-step-2"
-                        class="flex items-center justify-center drop-shadow-[0_2px_5px_rgba(0,0,0,0.12)] transition-all duration-700 opacity-40 grayscale scale-95"
+                        class="locked-step-node grayscale-hidden"
                       ></div>
                       <div
                         id="locked-step-3"
-                        class="flex items-center justify-center transition-all duration-700 opacity-40 grayscale scale-95"
+                        class="locked-step-node grayscale-hidden"
                       ></div>
                       <div
                         id="locked-step-4"
-                        class="flex items-center justify-center transition-all duration-700 opacity-40 grayscale scale-95"
+                        class="locked-step-node grayscale-hidden"
                       ></div>
                     </div>
                   </div>
@@ -777,27 +705,137 @@
                   <!-- Locked Overlay (Visible when progress < 175) -->
                   <div
                     id="spend-points-locked-overlay"
-                    class="absolute inset-0 flex flex-col items-center justify-center z-20 transition-all duration-1000 opacity-100"
+                    class="spend-locked-overlay"
                   >
-                    <div
-                      id="locked-overlay-icons"
-                      class="flex items-center gap-3 mb-2"
-                    >
+                    <div id="locked-overlay-icons" class="locked-overlay-icons">
                       <!-- Dynamic icons will be here -->
                     </div>
                     <div
                       id="locked-overlay-label-wrapper"
-                      class="relative flex items-center justify-center min-h-[24px] w-full text-center"
+                      class="locked-overlay-label-wrapper"
                     >
-                      <p
-                        id="locked-overlay-label"
-                        class="relative text-[13px] font-semibold text-[#333333] tracking-wider uppercase mt-1 text-center w-full"
-                      >
+                      <p id="locked-overlay-label" class="locked-overlay-label">
                         SIGN UP TO JOIN VIP LOYALTY UNIVERSE CLUB
                       </p>
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- VIP Benefits Section (nested inside container-max below content-grid) -->
+          <div class="vip-benefits-section">
+            <div class="vip-benefits-container">
+              <!-- Left Column: Placeholder to align with background tree -->
+              <div class="vip-left-column"></div>
+
+              <!-- Right Column: Benefits Title, Cards & Action -->
+              <div class="vip-right-column">
+                <h2 class="vip-benefits-title">
+                  SHINE WITHIN DESERVES BENEFITS AS
+                </h2>
+
+                <!-- Cards Row -->
+                <div class="vip-cards-row">
+                  <!-- Card 1 -->
+                  <div
+                    class="vip-benefit-card"
+                    style="
+                      background-image: url(&quot;assets/Images/card.png&quot;);
+                    "
+                  >
+                    <div class="card-overlay"></div>
+                    <div class="card-text">
+                      <span>MAGICAL WELCOME</span>
+                      <span>DISCOUNT OFFER</span>
+                    </div>
+                  </div>
+
+                  <!-- Card 2 -->
+                  <div
+                    class="vip-benefit-card"
+                    style="
+                      background-image: url(&quot;assets/Images/card1.png&quot;);
+                    "
+                  >
+                    <div class="card-overlay"></div>
+                    <div class="card-text">
+                      <span>FREE MESSAGE</span>
+                      <span>TEXT CARDS</span>
+                    </div>
+                  </div>
+
+                  <!-- Card 3 -->
+                  <div
+                    class="vip-benefit-card"
+                    style="
+                      background-image: url(&quot;assets/Images/card2.png&quot;);
+                    "
+                  >
+                    <div class="card-overlay"></div>
+                    <div class="card-text">
+                      <span>REAL AUTHENTIC</span>
+                      <span>CRYSTAL GIFTS</span>
+                    </div>
+                  </div>
+
+                  <!-- Card 4 -->
+                  <div
+                    class="vip-benefit-card"
+                    style="
+                      background-image: url(&quot;assets/Images/card1.png&quot;);
+                    "
+                  >
+                    <div class="card-overlay"></div>
+                    <div class="card-text">
+                      <span>FREE JEWELRY</span>
+                      <span>DESIGN PIECE</span>
+                    </div>
+                  </div>
+
+                  <!-- Card 5 -->
+                  <div
+                    class="vip-benefit-card"
+                    style="
+                      background-image: url(&quot;assets/Images/card2.png&quot;);
+                    "
+                  >
+                    <div class="card-overlay"></div>
+                    <div class="card-text">
+                      <span>VIEW & VOTE</span>
+                      <span>NEW DESIGNS</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Subtext -->
+                <div class="vip-subtext-container">
+                  <p class="vip-subtext-title">
+                    Ready to unlock more sparkle rewards?
+                  </p>
+                  <p class="vip-subtext-desc">
+                    Join the VIP Universe and start leveling up today.
+                  </p>
+                </div>
+
+                <!-- Actions Row -->
+                <div class="vip-actions-row">
+                  <button class="vip-join-btn">JOIN VIP NOW</button>
+
+                  <div class="vip-faq-box">
+                    <span class="faq-question"
+                      >Questions about the VIP Universe?</span
+                    >
+                    <a href="#" class="faq-link">Learn More In Our FAQs</a>
+                  </div>
+                </div>
+
+                <!-- Cursive Text -->
+                <p class="vip-bottom-script">
+                  At S-Brillet, We Believe True Brilliance Is Discovered Within
+                  You...
+                </p>
               </div>
             </div>
           </div>
