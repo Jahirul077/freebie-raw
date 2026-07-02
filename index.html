@@ -5,30 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>VIP Loyalty Universe Club</title>
     <!-- Load custom index.css -->
-    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="index.css?v=19" />
   </head>
   <body>
-    <div class="relative w-full min-h-screen">
-      <!-- Background Image -->
-      <img
-        src="assets/Images/bg.png"
-        alt="Background"
-        class="bg-image"
-      />
-
+    <div class="vip-loyalty-app">
       <div class="page-wrapper">
         <div class="container-max">
           <!-- Header -->
           <div class="header-row">
-            <div class="header-title">
-              Shine Brighter as You Level Up
-            </div>
+            <div class="header-title">Shine Brighter as You Level Up</div>
 
             <!-- Play/Pause Demo Toggle Button -->
-            <button
-              id="demo-toggle-btn"
-              class="demo-toggle-btn"
-            >
+            <button id="demo-toggle-btn" class="demo-toggle-btn">
               <span id="demo-toggle-icon" class="demo-toggle-icon">
                 <!-- Play Icon -->
                 <svg
@@ -55,14 +43,9 @@
             <div class="col-left">
               <!-- EARN SPARKLE POINTS Section -->
               <div class="section-wrapper">
-                <h2 class="section-title">
-                  Earn Sparkle Points
-                </h2>
+                <h2 class="section-title">Earn Sparkle Points</h2>
 
-                <div
-                  id="earn-points-container"
-                  class="glass-card"
-                >
+                <div id="earn-points-container" class="glass-card">
                   <div class="earn-points-inner">
                     <!-- Concentric Circles & Icon -->
                     <div class="circles-outer-wrapper">
@@ -121,48 +104,162 @@
                           class="galaxy-circle-border"
                         />
                         <!-- Star 1 (top-left) -->
-                        <svg id="galaxy-star-1" class="absolute pointer-events-none" style="top: 26px; left: 26px; width: 60px; height: 60px; z-index: 50; opacity: 0; transition: opacity 0.7s ease-in-out;" viewBox="0 0 67 67" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg
+                          id="galaxy-star-1"
+                          class="absolute pointer-events-none"
+                          style="
+                            top: 26px;
+                            left: 26px;
+                            width: 60px;
+                            height: 60px;
+                            z-index: 50;
+                            opacity: 0;
+                            transition: opacity 0.7s ease-in-out;
+                          "
+                          viewBox="0 0 67 67"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
                           <g filter="url(#star1_filter)">
-                            <path d="M33.097 10C33.097 22.7561 43.4378 33.097 56.1939 33.097C43.4378 33.097 33.097 43.4378 33.097 56.1939C33.097 43.4378 22.7561 33.097 10 33.097C22.7561 33.097 33.097 22.7561 33.097 10Z" fill="url(#star1_gold)"/>
-                            <path d="M33.0975 19.2402C33.0975 26.8938 39.302 33.0984 46.9556 33.0984C39.302 33.0984 33.0975 39.3029 33.0975 46.9566C33.0975 39.3029 26.8929 33.0984 19.2393 33.0984C26.8929 33.0984 33.0975 26.8938 33.0975 19.2402Z" fill="white"/>
+                            <path
+                              d="M33.097 10C33.097 22.7561 43.4378 33.097 56.1939 33.097C43.4378 33.097 33.097 43.4378 33.097 56.1939C33.097 43.4378 22.7561 33.097 10 33.097C22.7561 33.097 33.097 22.7561 33.097 10Z"
+                              fill="url(#star1_gold)"
+                            />
+                            <path
+                              d="M33.0975 19.2402C33.0975 26.8938 39.302 33.0984 46.9556 33.0984C39.302 33.0984 33.0975 39.3029 33.0975 46.9566C33.0975 39.3029 26.8929 33.0984 19.2393 33.0984C26.8929 33.0984 33.0975 26.8938 33.0975 19.2402Z"
+                              fill="white"
+                            />
                           </g>
                           <defs>
-                            <filter id="star1_filter" x="0" y="0" width="66.1938" height="66.1934" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                              <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-                              <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-                              <feOffset/><feGaussianBlur stdDeviation="5"/>
-                              <feComposite in2="hardAlpha" operator="out"/>
-                              <feColorMatrix type="matrix" values="0 0 0 0 0.639216 0 0 0 0 0.54902 0 0 0 0 0.482353 0 0 0 0.25 0"/>
-                              <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
-                              <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+                            <filter
+                              id="star1_filter"
+                              x="0"
+                              y="0"
+                              width="66.1938"
+                              height="66.1934"
+                              filterUnits="userSpaceOnUse"
+                              color-interpolation-filters="sRGB"
+                            >
+                              <feFlood
+                                flood-opacity="0"
+                                result="BackgroundImageFix"
+                              />
+                              <feColorMatrix
+                                in="SourceAlpha"
+                                type="matrix"
+                                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                                result="hardAlpha"
+                              />
+                              <feOffset />
+                              <feGaussianBlur stdDeviation="5" />
+                              <feComposite in2="hardAlpha" operator="out" />
+                              <feColorMatrix
+                                type="matrix"
+                                values="0 0 0 0 0.639216 0 0 0 0 0.54902 0 0 0 0 0.482353 0 0 0 0.25 0"
+                              />
+                              <feBlend
+                                mode="normal"
+                                in2="BackgroundImageFix"
+                                result="effect1_dropShadow"
+                              />
+                              <feBlend
+                                mode="normal"
+                                in="SourceGraphic"
+                                in2="effect1_dropShadow"
+                                result="shape"
+                              />
                             </filter>
-                            <linearGradient id="star1_gold" x1="33.097" y1="8.097" x2="33.097" y2="58.097" gradientUnits="userSpaceOnUse">
-                              <stop stop-color="#f7f7f7"/>
-                              <stop offset="0.5" stop-color="#f7f7f7"/>
-                              <stop offset="1" stop-color="#f7f7f7"/>
+                            <linearGradient
+                              id="star1_gold"
+                              x1="33.097"
+                              y1="8.097"
+                              x2="33.097"
+                              y2="58.097"
+                              gradientUnits="userSpaceOnUse"
+                            >
+                              <stop stop-color="#f7f7f7" />
+                              <stop offset="0.5" stop-color="#f7f7f7" />
+                              <stop offset="1" stop-color="#f7f7f7" />
                             </linearGradient>
                           </defs>
                         </svg>
                         <!-- Star 2 (bottom-right) -->
-                        <svg id="galaxy-star-2" class="absolute pointer-events-none" style="top: 94px; left: 94px; width: 60px; height: 60px; z-index: 50; opacity: 0; transition: opacity 0.7s ease-in-out;" viewBox="0 0 67 67" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg
+                          id="galaxy-star-2"
+                          class="absolute pointer-events-none"
+                          style="
+                            top: 94px;
+                            left: 94px;
+                            width: 60px;
+                            height: 60px;
+                            z-index: 50;
+                            opacity: 0;
+                            transition: opacity 0.7s ease-in-out;
+                          "
+                          viewBox="0 0 67 67"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
                           <g filter="url(#star2_filter)">
-                            <path d="M33.097 10C33.097 22.7561 43.4378 33.097 56.1939 33.097C43.4378 33.097 33.097 43.4378 33.097 56.1939C33.097 43.4378 22.7561 33.097 10 33.097C22.7561 33.097 33.097 22.7561 33.097 10Z" fill="url(#star2_gold)"/>
-                            <path d="M33.0975 19.2402C33.0975 26.8938 39.302 33.0984 46.9556 33.0984C39.302 33.0984 33.0975 39.3029 33.0975 46.9566C33.0975 39.3029 26.8929 33.0984 19.2393 33.0984C26.8929 33.0984 33.0975 26.8938 33.0975 19.2402Z" fill="white"/>
+                            <path
+                              d="M33.097 10C33.097 22.7561 43.4378 33.097 56.1939 33.097C43.4378 33.097 33.097 43.4378 33.097 56.1939C33.097 43.4378 22.7561 33.097 10 33.097C22.7561 33.097 33.097 22.7561 33.097 10Z"
+                              fill="url(#star2_gold)"
+                            />
+                            <path
+                              d="M33.0975 19.2402C33.0975 26.8938 39.302 33.0984 46.9556 33.0984C39.302 33.0984 33.0975 39.3029 33.0975 46.9566C33.0975 39.3029 26.8929 33.0984 19.2393 33.0984C26.8929 33.0984 33.0975 26.8938 33.0975 19.2402Z"
+                              fill="white"
+                            />
                           </g>
                           <defs>
-                            <filter id="star2_filter" x="0" y="0" width="66.1938" height="66.1934" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                              <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-                              <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-                              <feOffset/><feGaussianBlur stdDeviation="5"/>
-                              <feComposite in2="hardAlpha" operator="out"/>
-                              <feColorMatrix type="matrix" values="0 0 0 0 0.639216 0 0 0 0 0.54902 0 0 0 0 0.482353 0 0 0 0.25 0"/>
-                              <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
-                              <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+                            <filter
+                              id="star2_filter"
+                              x="0"
+                              y="0"
+                              width="66.1938"
+                              height="66.1934"
+                              filterUnits="userSpaceOnUse"
+                              color-interpolation-filters="sRGB"
+                            >
+                              <feFlood
+                                flood-opacity="0"
+                                result="BackgroundImageFix"
+                              />
+                              <feColorMatrix
+                                in="SourceAlpha"
+                                type="matrix"
+                                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                                result="hardAlpha"
+                              />
+                              <feOffset />
+                              <feGaussianBlur stdDeviation="5" />
+                              <feComposite in2="hardAlpha" operator="out" />
+                              <feColorMatrix
+                                type="matrix"
+                                values="0 0 0 0 0.639216 0 0 0 0 0.54902 0 0 0 0 0.482353 0 0 0 0.25 0"
+                              />
+                              <feBlend
+                                mode="normal"
+                                in2="BackgroundImageFix"
+                                result="effect1_dropShadow"
+                              />
+                              <feBlend
+                                mode="normal"
+                                in="SourceGraphic"
+                                in2="effect1_dropShadow"
+                                result="shape"
+                              />
                             </filter>
-                            <linearGradient id="star2_gold" x1="33.097" y1="8.097" x2="33.097" y2="58.097" gradientUnits="userSpaceOnUse">
-                              <stop stop-color="#f7f7f7"/>
-                              <stop offset="0.5" stop-color="#f7f7f7"/>
-                              <stop offset="1" stop-color="#f7f7f7"/>
+                            <linearGradient
+                              id="star2_gold"
+                              x1="33.097"
+                              y1="8.097"
+                              x2="33.097"
+                              y2="58.097"
+                              gradientUnits="userSpaceOnUse"
+                            >
+                              <stop stop-color="#f7f7f7" />
+                              <stop offset="0.5" stop-color="#f7f7f7" />
+                              <stop offset="1" stop-color="#f7f7f7" />
                             </linearGradient>
                           </defs>
                         </svg>
@@ -300,10 +397,7 @@
                     </div>
 
                     <!-- Points Box -->
-                    <div
-                      id="points-box-container"
-                      class="points-box-container"
-                    >
+                    <div id="points-box-container" class="points-box-container">
                       <div class="points-box-inner">
                         <div
                           id="points-number-wrapper"
@@ -317,17 +411,12 @@
                         </div>
                         <span id="star-icon-points"></span>
                       </div>
-                      <span class="points-box-label">
-                        SPARKLE POINTS
-                      </span>
+                      <span class="points-box-label"> SPARKLE POINTS </span>
                     </div>
                   </div>
 
                   <!-- S-BRILLET / SHINY / STARLIGHT / GALAXY Bar -->
-                  <div
-                    id="tier-card-interactive"
-                    class="tier-card-interactive"
-                  >
+                  <div id="tier-card-interactive" class="tier-card-interactive">
                     <div class="tier-inner-container">
                       <!-- S-BRILLET Container -->
                       <div
@@ -337,9 +426,7 @@
                         <div class="flex-between">
                           <div class="flex-align-center gap-3">
                             <span id="s-brillet-logo"></span>
-                            <span
-                              id="s-brillet-title"
-                              class="tier-title"
+                            <span id="s-brillet-title" class="tier-title"
                               >S-BRILLET</span
                             >
                           </div>
@@ -354,9 +441,7 @@
                         <div class="flex-between pt-1">
                           <div class="flex-align-center gap-2">
                             <span id="s-brillet-signup-icon"></span>
-                            <span class="tier-item-label"
-                              >Sign Up</span
-                            >
+                            <span class="tier-item-label">Sign Up</span>
                           </div>
                           <span
                             id="s-brillet-signup-points"
@@ -375,9 +460,7 @@
                         <div class="flex-between">
                           <div class="flex-align-center gap-3">
                             <span id="shiny-logo"></span>
-                            <span class="tier-title shiny"
-                              >SHINY</span
-                            >
+                            <span class="tier-title shiny">SHINY</span>
                           </div>
                           <span
                             id="shiny-points-label"
@@ -425,9 +508,7 @@
                         <div class="flex-between">
                           <div class="flex-align-center gap-3">
                             <span id="starlight-logo"></span>
-                            <span class="tier-title"
-                              >STARLIGHT</span
-                            >
+                            <span class="tier-title">STARLIGHT</span>
                           </div>
                           <span
                             id="starlight-points-label"
@@ -440,9 +521,7 @@
                         <div class="flex-between pt-1">
                           <div class="flex-align-center gap-2">
                             <span id="starlight-purchase-icon"></span>
-                            <span class="tier-item-label"
-                              >Purchase Items</span
-                            >
+                            <span class="tier-item-label">Purchase Items</span>
                           </div>
                           <span
                             id="starlight-purchase-points"
@@ -454,9 +533,7 @@
                         <div class="flex-between pt-1">
                           <div class="flex-align-center gap-2">
                             <span id="starlight-refer-icon"></span>
-                            <span class="tier-item-label"
-                              >Refer a Friend</span
-                            >
+                            <span class="tier-item-label">Refer a Friend</span>
                           </div>
                           <span
                             id="starlight-refer-points"
@@ -475,9 +552,7 @@
                         <div class="flex-between">
                           <div class="flex-align-center gap-3">
                             <span id="galaxy-logo"></span>
-                            <span
-                              id="galaxy-title"
-                              class="tier-title shiny"
+                            <span id="galaxy-title" class="tier-title shiny"
                               >GALAXY</span
                             >
                           </div>
@@ -492,9 +567,7 @@
                         <div class="flex-between pt-1">
                           <div class="flex-align-center gap-2">
                             <span id="galaxy-purchase-icon"></span>
-                            <span class="tier-item-label"
-                              >Purchase Items</span
-                            >
+                            <span class="tier-item-label">Purchase Items</span>
                           </div>
                           <span
                             id="galaxy-purchase-points"
@@ -506,9 +579,7 @@
                         <div class="flex-between pt-1">
                           <div class="flex-align-center gap-2">
                             <span id="galaxy-refer-icon"></span>
-                            <span class="tier-item-label"
-                              >Refer a Friend</span
-                            >
+                            <span class="tier-item-label">Refer a Friend</span>
                           </div>
                           <span
                             id="galaxy-refer-points"
@@ -525,16 +596,11 @@
 
               <!-- UNLOCK BUNDLE DEALS Section -->
               <div class="section-wrapper">
-                <h2 class="section-title">
-                  Unlock Bundle Deals
-                </h2>
+                <h2 class="section-title">Unlock Bundle Deals</h2>
 
                 <div class="glass-card-bundle">
                   <!-- Diamonds row -->
-                  <div
-                    id="bundle-deals-diamonds"
-                    class="diamonds-row"
-                  >
+                  <div id="bundle-deals-diamonds" class="diamonds-row">
                     <!-- Will be rendered dynamically via JS -->
                   </div>
 
@@ -542,10 +608,7 @@
                     id="bundle-deals-label-wrapper"
                     class="bundle-label-wrapper"
                   >
-                    <span
-                      id="bundle-deals-label"
-                      class="bundle-deals-label"
-                    >
+                    <span id="bundle-deals-label" class="bundle-deals-label">
                       LEVEL UP TO SHINY TIER
                     </span>
                   </div>
@@ -557,15 +620,10 @@
             <div class="col-right">
               <!-- UNLOCK TIER REWARDS Section -->
               <div class="section-wrapper">
-                <h2 class="section-title">
-                  Unlock Tier Rewards
-                </h2>
+                <h2 class="section-title">Unlock Tier Rewards</h2>
 
                 <div class="glass-card-rewards">
-                  <div
-                    id="tier-rewards-grid"
-                    class="rewards-grid"
-                  >
+                  <div id="tier-rewards-grid" class="rewards-grid">
                     <!-- Will be rendered dynamically via JS -->
                   </div>
                 </div>
@@ -573,9 +631,7 @@
 
               <!-- SPEND SPARKLE POINTS Section -->
               <div class="section-wrapper">
-                <h2 class="section-title">
-                  Spend Sparkle Points
-                </h2>
+                <h2 class="section-title">Spend Sparkle Points</h2>
 
                 <div class="glass-card-spend">
                   <!-- Slider Container (Visible when progress >= 175) -->
@@ -598,10 +654,7 @@
                         style="width: 0%"
                       >
                         <!-- Glowing Star Thumb -->
-                        <div
-                          id="slider-star-thumb"
-                          class="slider-star-thumb"
-                        >
+                        <div id="slider-star-thumb" class="slider-star-thumb">
                           <!-- Custom Star SVG -->
                         </div>
                       </div>
@@ -675,25 +728,135 @@
                     id="spend-points-locked-overlay"
                     class="spend-locked-overlay"
                   >
-                    <div
-                      id="locked-overlay-icons"
-                      class="locked-overlay-icons"
-                    >
+                    <div id="locked-overlay-icons" class="locked-overlay-icons">
                       <!-- Dynamic icons will be here -->
                     </div>
                     <div
                       id="locked-overlay-label-wrapper"
                       class="locked-overlay-label-wrapper"
                     >
-                      <p
-                        id="locked-overlay-label"
-                        class="locked-overlay-label"
-                      >
+                      <p id="locked-overlay-label" class="locked-overlay-label">
                         SIGN UP TO JOIN VIP LOYALTY UNIVERSE CLUB
                       </p>
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- VIP Benefits Section (nested inside container-max below content-grid) -->
+          <div class="vip-benefits-section">
+            <div class="vip-benefits-container">
+              <!-- Left Column: Placeholder to align with background tree -->
+              <div class="vip-left-column"></div>
+
+              <!-- Right Column: Benefits Title, Cards & Action -->
+              <div class="vip-right-column">
+                <h2 class="vip-benefits-title">
+                  SHINE WITHIN DESERVES BENEFITS AS
+                </h2>
+
+                <!-- Cards Row -->
+                <div class="vip-cards-row">
+                  <!-- Card 1 -->
+                  <div
+                    class="vip-benefit-card"
+                    style="
+                      background-image: url(&quot;assets/Images/card.png&quot;);
+                    "
+                  >
+                    <div class="card-overlay"></div>
+                    <div class="card-text">
+                      <span>MAGICAL WELCOME</span>
+                      <span>DISCOUNT OFFER</span>
+                    </div>
+                  </div>
+
+                  <!-- Card 2 -->
+                  <div
+                    class="vip-benefit-card"
+                    style="
+                      background-image: url(&quot;assets/Images/card1.png&quot;);
+                    "
+                  >
+                    <div class="card-overlay"></div>
+                    <div class="card-text">
+                      <span>FREE MESSAGE</span>
+                      <span>TEXT CARDS</span>
+                    </div>
+                  </div>
+
+                  <!-- Card 3 -->
+                  <div
+                    class="vip-benefit-card"
+                    style="
+                      background-image: url(&quot;assets/Images/card2.png&quot;);
+                    "
+                  >
+                    <div class="card-overlay"></div>
+                    <div class="card-text">
+                      <span>REAL AUTHENTIC</span>
+                      <span>CRYSTAL GIFTS</span>
+                    </div>
+                  </div>
+
+                  <!-- Card 4 -->
+                  <div
+                    class="vip-benefit-card"
+                    style="
+                      background-image: url(&quot;assets/Images/card1.png&quot;);
+                    "
+                  >
+                    <div class="card-overlay"></div>
+                    <div class="card-text">
+                      <span>FREE JEWELRY</span>
+                      <span>DESIGN PIECE</span>
+                    </div>
+                  </div>
+
+                  <!-- Card 5 -->
+                  <div
+                    class="vip-benefit-card"
+                    style="
+                      background-image: url(&quot;assets/Images/card2.png&quot;);
+                    "
+                  >
+                    <div class="card-overlay"></div>
+                    <div class="card-text">
+                      <span>VIEW & VOTE</span>
+                      <span>NEW DESIGNS</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Subtext -->
+                <div class="vip-subtext-container">
+                  <p class="vip-subtext-title">
+                    Ready to unlock more sparkle rewards?
+                  </p>
+                  <p class="vip-subtext-desc">
+                    Join the VIP Universe and start leveling up today.
+                  </p>
+                </div>
+
+                <!-- Actions Row -->
+                <div class="vip-actions-row">
+                  <button class="vip-join-btn">JOIN VIP NOW</button>
+
+                  <div class="vip-faq-box">
+                    <span class="faq-question"
+                      >Questions about the VIP Universe?</span
+                    >
+                    <a href="#" class="faq-link">Learn More In Our FAQs</a>
+                  </div>
+                </div>
+
+                <!-- Cursive Text -->
+                <p class="vip-bottom-script">
+                  At S-Brillet, We Believe True Brilliance Is Discovered Within
+                  You...
+                </p>
               </div>
             </div>
           </div>

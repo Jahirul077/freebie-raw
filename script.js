@@ -259,13 +259,15 @@ function updateLockedLabelWithTransition(newText) {
       const currentLabel = document.getElementById("locked-overlay-label");
       if (currentLabel) {
         // Prepare current label to fade out absolutely with identical centering classes
-        currentLabel.className = "locked-overlay-label-absolute points-fade-out-active";
+        currentLabel.className =
+          "locked-overlay-label-absolute points-fade-out-active";
         currentLabel.id = "locked-overlay-label-old";
 
         // Create new label
         const newLabel = document.createElement("p");
         newLabel.id = "locked-overlay-label";
-        newLabel.className = "locked-overlay-label-absolute points-fade-in-active";
+        newLabel.className =
+          "locked-overlay-label-absolute points-fade-in-active";
         newLabel.innerText = newText;
 
         wrapper.appendChild(newLabel);
@@ -299,13 +301,15 @@ function updateBundleDealsLabelWithTransition(newText) {
       const currentLabel = document.getElementById("bundle-deals-label");
       if (currentLabel) {
         // Prepare current label to fade out absolutely with identical centering classes
-        currentLabel.className = "bundle-deals-label-absolute points-fade-out-active";
+        currentLabel.className =
+          "bundle-deals-label-absolute points-fade-out-active";
         currentLabel.id = "bundle-deals-label-old";
 
         // Create new label
         const newLabel = document.createElement("span");
         newLabel.id = "bundle-deals-label";
-        newLabel.className = "bundle-deals-label-absolute points-fade-in-active";
+        newLabel.className =
+          "bundle-deals-label-absolute points-fade-in-active";
         newLabel.innerText = newText;
 
         wrapper.appendChild(newLabel);
@@ -481,7 +485,7 @@ function updateUI() {
       points = 150 + steps * 50;
     }
 
-    const showAlternatePosition = (points % 100 === 50);
+    const showAlternatePosition = points % 100 === 50;
 
     if (star1) {
       star1.style.transition = ""; // Clear transitions for position swap
@@ -540,7 +544,6 @@ function updateUI() {
       star2.style.transform = "";
     }
   }
-
 
   // Ring 2
   let r2Prog = null;
@@ -1014,17 +1017,11 @@ function updateUI() {
     starlightReferPoints.className = "tier-item-points completed";
   } else {
     starlightPointsLabel.className =
-      progress >= 130
-        ? "tier-points-label active"
-        : "tier-points-label";
+      progress >= 130 ? "tier-points-label active" : "tier-points-label";
     starlightPurchasePoints.className =
-      progress >= 125
-        ? "tier-item-points active"
-        : "tier-item-points";
+      progress >= 125 ? "tier-item-points active" : "tier-item-points";
     starlightReferPoints.className =
-      progress >= 128
-        ? "tier-item-points active"
-        : "tier-item-points";
+      progress >= 128 ? "tier-item-points active" : "tier-item-points";
   }
 
   const starlightPurchaseIcon = document.getElementById(
@@ -1437,25 +1434,17 @@ function updateUI() {
     step4.innerHTML = svgs.Star2SVG;
 
     // Apply step styles
-    if (progress >= 160)
-      step1.className = "locked-step-node active-gold";
-    else
-      step1.className = "locked-step-node grayscale-hidden";
+    if (progress >= 160) step1.className = "locked-step-node active-gold";
+    else step1.className = "locked-step-node grayscale-hidden";
 
-    if (progress >= 162)
-      step2.className = "locked-step-node active-gold";
-    else
-      step2.className = "locked-step-node grayscale-hidden";
+    if (progress >= 162) step2.className = "locked-step-node active-gold";
+    else step2.className = "locked-step-node grayscale-hidden";
 
-    if (progress >= 165)
-      step3.className = "locked-step-node active-gold";
-    else
-      step3.className = "locked-step-node grayscale-hidden";
+    if (progress >= 165) step3.className = "locked-step-node active-gold";
+    else step3.className = "locked-step-node grayscale-hidden";
 
-    if (progress >= 170)
-      step4.className = "locked-step-node active-purple";
-    else
-      step4.className = "locked-step-node inactive-purple";
+    if (progress >= 170) step4.className = "locked-step-node active-purple";
+    else step4.className = "locked-step-node inactive-purple";
 
     // Locked Overlay display details
     const overlayIcons = document.getElementById("locked-overlay-icons");
@@ -1705,16 +1694,10 @@ tierCardInteractive.addEventListener("click", () => {
 // Initialize UI
 if (typeof svgs !== "undefined") {
   if (svgs.LockSVG) {
-    svgs.LockSVG = svgs.LockSVG.replace(
-      "{class}",
-      "lock-icon-svg",
-    );
+    svgs.LockSVG = svgs.LockSVG.replace("{class}", "lock-icon-svg");
   }
   if (svgs.UnlockSVG) {
-    svgs.UnlockSVG = svgs.UnlockSVG.replace(
-      "{class}",
-      "unlock-icon-svg",
-    );
+    svgs.UnlockSVG = svgs.UnlockSVG.replace("{class}", "unlock-icon-svg");
   }
 }
 initBundleDealsDiamonds();

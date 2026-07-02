@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Geist:wght@100..900&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Geist:wght@100..900&family=Inter:wght@400;500;600;700&family=Great+Vibes&display=swap');
+
 
 /* Reset and base styles */
 * {
@@ -33,19 +34,27 @@ body {
   display: none !important;
 }
 
-/* Background image layout */
-.bg-image {
+/* VIP Loyalty App main background */
+.vip-loyalty-app {
+  position: relative;
   width: 100%;
-  height: auto;
-  object-fit: cover;
-  display: block;
+  background-image: url('assets/Images/bg.png');
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-color: #0c0818;
+}
+
+@media (min-width: 1024px) {
+  .vip-loyalty-app {
+    min-height: calc(100vw * (3354 / 3840));
+  }
 }
 
 /* Page wrapper and container */
 .page-wrapper {
-  position: absolute;
-  top: 24px;
-  left: 0;
+  position: relative;
+  padding-top: 24px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -1270,3 +1279,289 @@ body {
 .star-pop-active {
   animation: starZoomIn 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
+
+/* ==========================================================================
+   VIP Benefits Section Styles
+   ========================================================================== */
+
+.vip-benefits-section {
+  position: relative;
+  width: 100%;
+  padding: 60px 0 20px 0;
+  box-sizing: border-box;
+  background: transparent;
+}
+
+.vip-benefits-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .vip-benefits-container {
+    grid-template-columns: 5fr 7fr;
+    gap: 64px;
+  }
+}
+
+.vip-left-column {
+  width: 100%;
+  height: 350px; /* Spacer for mobile to push content below the tree graphic in bg1.png */
+}
+
+@media (min-width: 1024px) {
+  .vip-left-column {
+    height: auto;
+  }
+}
+
+/* Right Column */
+.vip-right-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.vip-benefits-title {
+  font-family: 'Libre Caslon Text', serif;
+  font-size: 2.2rem;
+  font-weight: 400;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  line-height: 1.25;
+}
+
+@media (min-width: 768px) {
+  .vip-benefits-title {
+    font-size: 3rem;
+    white-space: nowrap;
+  }
+}
+
+.vip-cards-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 40px;
+  width: 100%;
+  overflow-x: auto;
+  padding-bottom: 16px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.vip-cards-row::-webkit-scrollbar {
+  height: 6px;
+}
+
+.vip-cards-row::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 3px;
+}
+
+.vip-cards-row::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+@keyframes cardGlowBlink {
+  0% {
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+  }
+}
+
+.vip-benefit-card {
+  position: relative;
+  flex: 0 0 170px;
+  height: 200px;
+  border-radius: 16px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  cursor: pointer;
+  animation: cardGlowBlink 3s infinite ease-in-out;
+}
+
+
+
+@media (min-width: 1200px) {
+  .vip-benefit-card {
+    flex: 1 1 0px;
+    height: 190px;
+  }
+}
+
+
+.card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.card-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  opacity: 0.8;
+}
+
+.card-text {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 16px;
+}
+
+.card-text span {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #FFFFFF;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1.3;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.card-text span:first-child {
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 11px;
+  margin-bottom: 2px;
+}
+
+.vip-subtext-container {
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.vip-subtext-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+  letter-spacing: -0.01em;
+}
+
+.vip-subtext-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.vip-actions-row {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: flex-start;
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .vip-actions-row {
+    flex-direction: row;
+    align-items: center;
+    gap: 32px;
+  }
+}
+
+.vip-join-btn {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.04) 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  border-radius: 8px;
+  padding: 16px 44px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  white-space: nowrap;
+}
+
+
+.vip-join-btn:active {
+  transform: translateY(1px);
+}
+
+.vip-faq-box {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.faq-question {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.faq-link {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #FFFFFF;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: color 0.2s ease;
+}
+
+
+.vip-bottom-script {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2.2rem;
+  color: #FFFFFF;
+  text-align: right;
+  width: 100%;
+  margin-top: 120px;
+  letter-spacing: 0.03em;
+  text-shadow: 
+    0 0 5px rgba(255, 255, 255, 0.9),
+    0 0 10px rgba(255, 255, 255, 0.7),
+    0 0 20px rgba(255, 255, 255, 0.5),
+    0 0 30px rgba(255, 255, 255, 0.3);
+}
+
+@media (min-width: 1024px) {
+  .vip-bottom-script {
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 1023px) {
+  .vip-bottom-script {
+    text-align: center;
+    margin-top: 80px;
+  }
+}
+
